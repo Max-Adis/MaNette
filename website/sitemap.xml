@@ -2,27 +2,27 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
    <!-- Page d'accueil -->
    <url>
-      <loc>/</loc>
+      <loc>https://manette-free.vercel.app/</loc>
       <lastmod>2026-08-21</lastmod>
       <changefreq>monthly</changefreq>
       <priority>1.0</priority>
    </url>
    <!-- FAQ -->
    <url>
-      <loc>/faq.html</loc>
+      <loc>https://manette-free.vercel.app/faq.html</loc>
       <lastmod>2026-08-21</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.8</priority>
    </url>
    <!-- Pages Légales -->
    <url>
-      <loc>/politique.html</loc>
+      <loc>https://manette-free.vercel.app/politique.html</loc>
       <lastmod>2026-08-21</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.3</priority>
    </url>
    <url>
-      <loc>/conditions.html</loc>
+      <loc>https://manette-free.vercel.app/conditions.html</loc>
       <lastmod>2026-08-21</lastmod>
       <changefreq>yearly</changefreq>
       <priority>0.3</priority>
