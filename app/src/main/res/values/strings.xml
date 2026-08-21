@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">MaNette</string>
+    <string name="app_tagline">Votre manette, partout</string>
+
+    <!-- Home Screen -->
+    <string name="home_title">MaNette</string>
+    <string name="home_subtitle">Transformez votre smartphone en manette</string>
+    <string name="btn_scan">Scanner les appareils</string>
+    <string name="btn_connect">Se connecter</string>
+    <string name="btn_disconnect">Déconnecter</string>
+    <string name="btn_start_gamepad">Lancer la manette</string>
+    <string name="status_disconnected">Non connecté</string>
+    <string name="status_scanning">Recherche en cours…</string>
+    <string name="status_connecting">Connexion…</string>
+    <string name="status_connected">Connecté</string>
+    <string name="no_devices_found">Aucun appareil trouvé</string>
+    <string name="bluetooth_not_supported">Bluetooth HID non supporté</string>
+    <string name="bt_enable_required">Veuillez activer le Bluetooth</string>
+
+    <!-- Gamepad Screen -->
+    <string name="gamepad_title">Manette active</string>
+    <string name="btn_debug">Debug HID</string>
+    <string name="btn_back_home">Accueil</string>
+    <string name="debug_title">Rapport HID</string>
+    <string name="hid_report_label">Rapport :</string>
+
+    <!-- Notifications -->
+    <string name="notif_channel_id">manette_hid_service</string>
+    <string name="notif_channel_name">Service Manette HID</string>
+    <string name="notif_title">MaNette active</string>
+    <string name="notif_text">Manette Bluetooth HID en cours</string>
+
+    <!-- Permissions -->
+    <string name="perm_bluetooth_rationale">MaNette a besoin du Bluetooth pour se connecter au PC comme manette HID.</string>
+    <string name="perm_denied">Permission refusée – Bluetooth requis</string>
+</resources>

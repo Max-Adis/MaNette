@@ -1,0 +1,22 @@
+pluginManagement {
+    repositories {
+        // Use local Gradle cache first (already downloaded by Android Studio)
+        maven { url "$System.env.USERPROFILE\\.gradle\\caches\\modules-2\\files-2.1" }
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        // Use local Android SDK Maven repos
+        maven { url "$System.env.LOCALAPPDATA\\Android\\Sdk\\extras\\m2repository" }
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+
+rootProject.name = "MaNette"
+include ':app'

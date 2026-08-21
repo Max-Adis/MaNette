@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# On empêche l'indexation de certains fichiers bruts (comme le code CSS ou l'APK lui-même pour ne pas polluer les résultats Google)
+Disallow: /*.apk$
+Disallow: /*.css$
+
+Sitemap: /sitemap.xml

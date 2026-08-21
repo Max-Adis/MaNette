@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Full-screen landscape gamepad - Image native + Overlay Layout pour les pourcentages -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:keepScreenOn="true">
+
+    <!-- 1. IMAGE DE LA MANETTE – fond plein écran -->
+    <ImageView
+        android:id="@+id/imgController"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/manette"
+        android:scaleType="fitCenter" />
+
+    <!-- 2. OVERLAY PRINCIPAL – Custom Layout % -->
+    <!-- Les boutons sont rendus transparents car le visuel est sur l'image -->
+    <com.manette.app.views.GamepadOverlayLayout
+        android:id="@+id/overlayLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btnL"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.0600,0.1500,0.2000,0.1400" />
+
+        <Button
+            android:id="@+id/btnR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.0600,0.6400,0.2000,0.1400" />
+
+        <com.manette.app.views.VirtualJoystickView
+            android:id="@+id/leftJoystick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="0.3100,0.1000,0.1600,0.2800" />
+
+        <com.manette.app.views.VirtualJoystickView
+            android:id="@+id/rightJoystick"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="0.4700,0.5600,0.1600,0.2800" />
+
+        <!-- D-Pad fusionné (Bounding box globale des directions) -->
+        <com.manette.app.views.DPadView
+            android:id="@+id/dpadView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="0.4850,0.2400,0.1400,0.2500" />
+
+        <Button
+            android:id="@+id/btnY"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.2500,0.7500,0.0800,0.1400" />
+
+        <Button
+            android:id="@+id/btnX"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.3400,0.6900,0.0800,0.1400" />
+
+        <Button
+            android:id="@+id/btnB"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.3400,0.8200,0.0800,0.1400" />
+
+        <Button
+            android:id="@+id/btnA"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.4500,0.7500,0.0800,0.1400" />
+
+        <Button
+            android:id="@+id/btnSelect"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.3800,0.3800,0.0800,0.0800" />
+
+        <Button
+            android:id="@+id/btnStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:tag="0.3800,0.4900,0.0800,0.0800" />
+
+    </com.manette.app.views.GamepadOverlayLayout>
+
+    <!-- 3. BARRE DE STATUT (discrète) -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="16dp"
+        android:background="#22000000">
+
+        <View
+            android:id="@+id/gpStatusDot"
+            android:layout_width="8dp"
+            android:layout_height="8dp"
+            android:background="@drawable/ic_status_dot" />
+
+        <TextView
+            android:id="@+id/tvGpStatus"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:text="@string/status_connected"
+            android:textSize="12sp"
+            android:textColor="#FFFFFF" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnDebug"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:text="HID"
+            android:textSize="10sp"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            app:strokeColor="#AAFFFFFF"
+            app:cornerRadius="8dp"
+            android:paddingHorizontal="10dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnHome"
+            android:layout_width="wrap_content"
+            android:layout_height="30dp"
+            android:layout_marginStart="8dp"
+            android:text="⌂"
+            android:textSize="15sp"
+            android:textColor="#FFFFFF"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            app:cornerRadius="8dp" />
+    </LinearLayout>
+
+    <!-- 4. OVERLAY DEBUG HID -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardDebug"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center_horizontal"
+        android:layout_margin="8dp"
+        app:cardBackgroundColor="#CC000000"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="8dp"
+        android:visibility="gone">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="◆ HID REPORT DEBUG"
+                android:textSize="10sp"
+                android:textColor="#00FF7F"
+                android:letterSpacing="0.1"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvHidReport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="Buttons: 0x00 | DPad: CENTER&#10;L.JS: (0,0) | R.JS: (0,0)"
+                android:textSize="11sp"
+                android:textColor="#00FF7F"
+                android:fontFamily="monospace" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</FrameLayout>

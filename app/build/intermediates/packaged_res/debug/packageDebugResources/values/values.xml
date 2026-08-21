@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="bg_screen">#F5F8FC</color>
+    <color name="bg_screen_alt">#EBF1F8</color>
+    <color name="border_subtle">#DDEAF8</color>
+    <color name="btn_a">#3D6A9E</color>
+    <color name="btn_b">#4A7AB0</color>
+    <color name="btn_center">#8FB4D8</color>
+    <color name="btn_shoulder">#2A4F7C</color>
+    <color name="btn_x">#2A4F7C</color>
+    <color name="btn_y">#5B8EC0</color>
+    <color name="debug_bg">#CC000000</color>
+    <color name="debug_text">#00FF7F</color>
+    <color name="glass_blue_08">#143D6A9E</color>
+    <color name="glass_blue_20">#333D6A9E</color>
+    <color name="glass_border">#40FFFFFF</color>
+    <color name="glass_white_08">#14FFFFFF</color>
+    <color name="glass_white_15">#26FFFFFF</color>
+    <color name="glass_white_25">#40FFFFFF</color>
+    <color name="grad_end">#D8E8F5</color>
+    <color name="grad_mid">#E8F0F8</color>
+    <color name="grad_start">#F0F5FA</color>
+    <color name="manette_blue">#3D6A9E</color>
+    <color name="manette_blue_accent">#5B8EC0</color>
+    <color name="manette_blue_deep">#2A4F7C</color>
+    <color name="manette_blue_light">#6A9FD4</color>
+    <color name="manette_blue_mid">#4A7AB0</color>
+    <color name="manette_blue_pale">#B8D4EE</color>
+    <color name="manette_deep_blue">#E8F0F8</color>
+    <color name="manette_ice">#E8F0FA</color>
+    <color name="manette_navy">#F0F5FA</color>
+    <color name="manette_off_white">#F0F4F8</color>
+    <color name="manette_white">#FFFFFF</color>
+    <color name="manette_white_80">#CCF8FAFC</color>
+    <color name="shadow_light">#1A2A4F7C</color>
+    <color name="shadow_medium">#332A4F7C</color>
+    <color name="status_connected">#2D8A4E</color>
+    <color name="status_connecting">#C07A20</color>
+    <color name="status_disconnected">#B03030</color>
+    <color name="text_accent">#3D6A9E</color>
+    <color name="text_on_button">#FFFFFF</color>
+    <color name="text_primary">#1A2B3C</color>
+    <color name="text_secondary">#5A7A9A</color>
+    <string name="app_name">MaNette</string>
+    <string name="app_tagline">Votre manette, partout</string>
+    <string name="bluetooth_not_supported">Bluetooth HID non supporté</string>
+    <string name="bt_enable_required">Veuillez activer le Bluetooth</string>
+    <string name="btn_back_home">Accueil</string>
+    <string name="btn_connect">Se connecter</string>
+    <string name="btn_debug">Debug HID</string>
+    <string name="btn_disconnect">Déconnecter</string>
+    <string name="btn_scan">Scanner les appareils</string>
+    <string name="btn_start_gamepad">Lancer la manette</string>
+    <string name="debug_title">Rapport HID</string>
+    <string name="gamepad_title">Manette active</string>
+    <string name="hid_report_label">Rapport :</string>
+    <string name="home_subtitle">Transformez votre smartphone en manette</string>
+    <string name="home_title">MaNette</string>
+    <string name="no_devices_found">Aucun appareil trouvé</string>
+    <string name="notif_channel_id">manette_hid_service</string>
+    <string name="notif_channel_name">Service Manette HID</string>
+    <string name="notif_text">Manette Bluetooth HID en cours</string>
+    <string name="notif_title">MaNette active</string>
+    <string name="perm_bluetooth_rationale">MaNette a besoin du Bluetooth pour se connecter au PC comme manette HID.</string>
+    <string name="perm_denied">Permission refusée – Bluetooth requis</string>
+    <string name="status_connected">Connecté</string>
+    <string name="status_connecting">Connexion…</string>
+    <string name="status_disconnected">Non connecté</string>
+    <string name="status_scanning">Recherche en cours…</string>
+    <style name="Theme.MaNette" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/manette_blue</item>
+        <item name="colorPrimaryVariant">@color/manette_blue_deep</item>
+        <item name="colorSecondary">@color/manette_blue_light</item>
+        <item name="android:colorBackground">@color/bg_screen</item>
+        <item name="android:windowBackground">@color/bg_screen</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@color/bg_screen</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:textColorPrimary">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+    <style name="Theme.MaNette.Fullscreen" parent="Theme.MaNette">
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Theme.MaNette.Splash" parent="Theme.MaNette">
+        <item name="android:windowBackground">@color/bg_screen</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+    <style name="Widget.MaNette.Button" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/manette_blue</item>
+        <item name="android:textColor">@color/text_on_button</item>
+        <item name="cornerRadius">16dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    <style name="Widget.MaNette.GamepadButton" parent="android:style/Widget.Button">
+        <item name="android:layout_width">60dp</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/text_on_button</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:gravity">center</item>
+        <item name="android:elevation">8dp</item>
+    </style>
+    <style name="Widget.MaNette.GlassCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardBackgroundColor">@color/manette_white</item>
+        <item name="cardElevation">4dp</item>
+        <item name="cardCornerRadius">20dp</item>
+        <item name="strokeColor">@color/border_subtle</item>
+        <item name="strokeWidth">1dp</item>
+    </style>
+</resources>

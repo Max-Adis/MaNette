@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ═══ Palette principale – Blanc & Bleu manette physique ═══ -->
+    <!-- Corps blanc de la manette -->
+    <color name="manette_white">#FFFFFF</color>
+    <color name="manette_white_80">#CCF8FAFC</color>
+    <color name="manette_off_white">#F0F4F8</color>
+    <color name="manette_ice">#E8F0FA</color>
+
+    <!-- Bleus (inspirés de la manette dans l'image) -->
+    <color name="manette_blue_deep">#2A4F7C</color>       <!-- bleu foncé corps -->
+    <color name="manette_blue">#3D6A9E</color>             <!-- bleu principal -->
+    <color name="manette_blue_mid">#4A7AB0</color>         <!-- bleu moyen -->
+    <color name="manette_blue_light">#6A9FD4</color>       <!-- bleu clair joystick -->
+    <color name="manette_blue_pale">#B8D4EE</color>        <!-- bleu très pâle -->
+    <color name="manette_blue_accent">#5B8EC0</color>      <!-- accent hover -->
+
+    <!-- Fond général de l'écran -->
+    <color name="bg_screen">#F5F8FC</color>                <!-- blanc légèrement bleuté -->
+    <color name="bg_screen_alt">#EBF1F8</color>
+
+    <!-- Ombres & contours -->
+    <color name="shadow_light">#1A2A4F7C</color>          <!-- ombre légère bleue -->
+    <color name="shadow_medium">#332A4F7C</color>
+    <color name="border_subtle">#DDEAF8</color>
+
+    <!-- Boutons face (tous bleus, comme dans l'image) -->
+    <color name="btn_a">#3D6A9E</color>
+    <color name="btn_b">#4A7AB0</color>
+    <color name="btn_x">#2A4F7C</color>
+    <color name="btn_y">#5B8EC0</color>
+    <color name="btn_shoulder">#2A4F7C</color>
+    <color name="btn_center">#8FB4D8</color>
+
+    <!-- Texte -->
+    <color name="text_primary">#1A2B3C</color>            <!-- texte sombre sur fond clair -->
+    <color name="text_secondary">#5A7A9A</color>
+    <color name="text_on_button">#FFFFFF</color>
+    <color name="text_accent">#3D6A9E</color>
+
+    <!-- Statut -->
+    <color name="status_connected">#2D8A4E</color>
+    <color name="status_connecting">#C07A20</color>
+    <color name="status_disconnected">#B03030</color>
+
+    <!-- Debug overlay -->
+    <color name="debug_bg">#CC000000</color>
+    <color name="debug_text">#00FF7F</color>
+
+    <!-- Glassmorphism léger sur fond blanc -->
+    <color name="glass_white_08">#14FFFFFF</color>
+    <color name="glass_white_15">#26FFFFFF</color>
+    <color name="glass_white_25">#40FFFFFF</color>
+    <color name="glass_border">#40FFFFFF</color>
+    <color name="glass_blue_08">#143D6A9E</color>
+    <color name="glass_blue_20">#333D6A9E</color>
+
+    <!-- Gradient stops (fond blanc -> bleu très pâle) -->
+    <color name="grad_start">#F0F5FA</color>
+    <color name="grad_mid">#E8F0F8</color>
+    <color name="grad_end">#D8E8F5</color>
+
+    <!-- Compatibilité legacy -->
+    <color name="manette_navy">#F0F5FA</color>
+    <color name="manette_deep_blue">#E8F0F8</color>
+</resources>
