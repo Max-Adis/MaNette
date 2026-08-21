@@ -11,6 +11,37 @@
     <meta property="og:title" content="FAQ - MaNette">
     <meta property="og:description" content="Toutes les réponses à vos questions sur l'application MaNette.">
     <meta property="og:image" content="assets/manette.jpg">
+
+    <!-- AEO & GEO : Données Structurées FAQ (Schema.org) pour les IA (Google SGE, Perplexity, ChatGPT) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [{
+        "@type": "Question",
+        "name": "L'application est-elle vraiment gratuite ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Oui, MaNette est 100% gratuite et sans aucune publicité intrusive."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Y a-t-il un temps de latence en Bluetooth ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "L'application utilise le profil Bluetooth HID natif, la latence est donc virtuellement inexistante, tout comme une vraie manette physique."
+        }
+      }, {
+        "@type": "Question",
+        "name": "Dois-je installer un logiciel sur mon PC ?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Non, aucun logiciel n'est nécessaire sur l'ordinateur. Le PC reconnaît le smartphone directement comme une manette de jeu Bluetooth."
+        }
+      }]
+    }
+    </script>
+
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
 </head>
