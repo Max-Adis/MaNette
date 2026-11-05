@@ -1,6 +1,5 @@
 package com.manette.app.ui.home
 
-import android.Manifest
 import android.annotation.SuppressLint
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -13,9 +12,11 @@ import android.content.IntentFilter
 import android.content.ServiceConnection
 import android.content.pm.PackageManager
 import android.graphics.Color
+import android.location.LocationManager
 import android.os.Build
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.view.View
 import android.view.WindowInsetsController
 import android.widget.Toast
@@ -25,6 +26,8 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.manette.app.R
+import com.manette.app.bluetooth.BluetoothPermissions
+import com.manette.app.bluetooth.BluetoothScanFilter
 import com.manette.app.bluetooth.HidDeviceService
 import com.manette.app.databinding.ActivityHomeBinding
 import com.manette.app.ui.gamepad.GamepadActivity
@@ -41,34 +44,55 @@ class HomeActivity : AppCompatActivity() {
     private var hidService: HidDeviceService? = null
     private var isBound = false
     private var selectedDevice: BluetoothDevice? = null
+    private var pendingConnect: BluetoothDevice? = null
+    private var receiverRegistered = false
 
     private val deviceAdapter = DeviceAdapter { device ->
         selectedDevice = device
-        showToast("Sélectionné : ${device.name ?: device.address}")
+        connectToSelected(device)
     }
 
     // ── Bluetooth ─────────────────────────────────────────────────────────────
     private val bluetoothManager by lazy { getSystemService(BluetoothManager::class.java) }
     private val bluetoothAdapter: BluetoothAdapter? get() = bluetoothManager.adapter
-    private val discoveredDevices = mutableSetOf<BluetoothDevice>()
+    private val discoveredDevices = LinkedHashMap<String, BluetoothDevice>()
 
     private val discoveryReceiver = object : BroadcastReceiver() {
         override fun onReceive(context: Context, intent: Intent) {
             when (intent.action) {
                 BluetoothDevice.ACTION_FOUND -> {
-                    val device = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
-                    } else {
-                        @Suppress("DEPRECATION")
-                        intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
-                    }
-                    device?.let { addDevice(it) }
+                    extraDevice(intent)?.let { addDevice(it) }
+                }
+                BluetoothAdapter.ACTION_DISCOVERY_STARTED -> {
+                    binding.btnScan.text = "Scan en cours…"
+                    binding.btnScan.isEnabled = false
                 }
                 BluetoothAdapter.ACTION_DISCOVERY_FINISHED -> {
                     binding.btnScan.text = getString(R.string.btn_scan)
                     binding.btnScan.isEnabled = true
-                    if (discoveredDevices.isEmpty()) {
-                        binding.tvNoDevices.visibility = View.VISIBLE
+                    publishDeviceList()
+                }
+                BluetoothDevice.ACTION_BOND_STATE_CHANGED -> {
+                    val device = extraDevice(intent) ?: return
+                    addDevice(device)
+                    val bond = intent.getIntExtra(
+                        BluetoothDevice.EXTRA_BOND_STATE,
+                        BluetoothDevice.BOND_NONE
+                    )
+                    if (bond == BluetoothDevice.BOND_BONDED &&
+                        device.address == pendingConnect?.address
+                    ) {
+                        attemptPendingConnect()
+                    }
+                }
+                BluetoothAdapter.ACTION_STATE_CHANGED -> {
+                    val state = intent.getIntExtra(
+                        BluetoothAdapter.EXTRA_STATE,
+                        BluetoothAdapter.ERROR
+                    )
+                    if (state == BluetoothAdapter.STATE_ON && hasBluetoothPermissions()) {
+                        startHidService()
+                        startDiscovery()
                     }
                 }
             }
@@ -81,6 +105,7 @@ class HomeActivity : AppCompatActivity() {
             hidService = (service as HidDeviceService.LocalBinder).getService()
             isBound = true
             observeServiceState()
+            attemptPendingConnect()
         }
         override fun onServiceDisconnected(name: ComponentName) {
             hidService = null
@@ -92,11 +117,27 @@ class HomeActivity : AppCompatActivity() {
     private val permissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestMultiplePermissions()
     ) { results ->
-        if (results.values.all { it }) {
+        val scanOk = BluetoothPermissions.requiredForScan(Build.VERSION.SDK_INT).all { perm ->
+            results[perm] == true || hasPermission(perm)
+        }
+        if (scanOk) {
             startHidService()
             startDiscovery()
         } else {
             showToast(getString(R.string.perm_denied))
+        }
+    }
+
+    private val enableBtLauncher = registerForActivityResult(
+        ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (bluetoothAdapter?.isEnabled == true) {
+            startHidService()
+            startDiscovery()
+        } else {
+            showToast(getString(R.string.bt_enable_failed))
+            binding.btnScan.text = getString(R.string.btn_scan)
+            binding.btnScan.isEnabled = true
         }
     }
 
@@ -110,21 +151,25 @@ class HomeActivity : AppCompatActivity() {
         setupRecyclerView()
         setupClickListeners()
         animateEntrance()
-
-        // Register BT discovery receiver
-        val filter = IntentFilter().apply {
-            addAction(BluetoothDevice.ACTION_FOUND)
-            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
-        }
-        registerReceiver(discoveryReceiver, filter)
+        registerDiscoveryReceiver()
     }
 
     override fun onStart() {
         super.onStart()
-        // Only bind if service is already running (started after permissions granted)
-        // Use 0 flags — don't auto-create the service here
         val serviceIntent = Intent(this, HidDeviceService::class.java)
         bindService(serviceIntent, serviceConnection, 0)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        binding.switchHaptic.isChecked = com.manette.app.util.HapticManager.isHapticEnabled(this)
+        if (hasBluetoothPermissions() && bluetoothAdapter?.isEnabled == true) {
+            addBondedDevices()
+            if (discoveredDevices.isNotEmpty()) {
+                binding.cardDevices.visibility = View.VISIBLE
+                publishDeviceList()
+            }
+        }
     }
 
     override fun onStop() {
@@ -138,7 +183,10 @@ class HomeActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         bluetoothAdapter?.cancelDiscovery()
-        unregisterReceiver(discoveryReceiver)
+        if (receiverRegistered) {
+            unregisterReceiver(discoveryReceiver)
+            receiverRegistered = false
+        }
     }
 
     // ── Setup ──────────────────────────────────────────────────────────────────
@@ -155,11 +203,6 @@ class HomeActivity : AppCompatActivity() {
             adapter = deviceAdapter
             itemAnimator = null
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-        binding.switchHaptic.isChecked = com.manette.app.util.HapticManager.isHapticEnabled(this)
     }
 
     private fun setupClickListeners() {
@@ -197,7 +240,6 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun animateEntrance() {
-        // Stagger child views for smooth entrance
         listOf(binding.imgLogo, binding.cardStatus, binding.btnScan).forEachIndexed { i, v ->
             v.alpha = 0f
             v.translationY = 40f
@@ -215,7 +257,11 @@ class HomeActivity : AppCompatActivity() {
         val serviceIntent = Intent(this, HidDeviceService::class.java).apply {
             action = HidDeviceService.ACTION_START
         }
-        startForegroundService(serviceIntent)
+        try {
+            startForegroundService(serviceIntent)
+        } catch (e: Exception) {
+            startService(serviceIntent)
+        }
         bindService(serviceIntent, serviceConnection, Context.BIND_AUTO_CREATE)
     }
 
@@ -248,58 +294,142 @@ class HomeActivity : AppCompatActivity() {
         }
         binding.tvStatus.text = statusText
         binding.statusDot.setBackgroundColor(dotColor)
-        // Pulse animation on status dot
         binding.statusDot.animate().scaleX(1.2f).scaleY(1.2f).setDuration(300)
             .withEndAction { binding.statusDot.animate().scaleX(1f).scaleY(1f).setDuration(300).start() }
             .start()
     }
 
     // ── Bluetooth Discovery ────────────────────────────────────────────────────
+    private fun registerDiscoveryReceiver() {
+        if (receiverRegistered) return
+        val filter = IntentFilter().apply {
+            addAction(BluetoothDevice.ACTION_FOUND)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED)
+            addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED)
+            addAction(BluetoothDevice.ACTION_BOND_STATE_CHANGED)
+            addAction(BluetoothAdapter.ACTION_STATE_CHANGED)
+        }
+        // ACTION_FOUND is sent by the Bluetooth app (not this UID). NOT_EXPORTED
+        // drops every result; Android 13+ also requires an explicit flag.
+        ContextCompat.registerReceiver(
+            this,
+            discoveryReceiver,
+            filter,
+            ContextCompat.RECEIVER_EXPORTED
+        )
+        receiverRegistered = true
+    }
+
+    private fun extraDevice(intent: Intent): BluetoothDevice? {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE, BluetoothDevice::class.java)
+        } else {
+            @Suppress("DEPRECATION")
+            intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE)
+        }
+    }
+
     private fun startDiscovery() {
+        val adapter = bluetoothAdapter
+        if (adapter == null) {
+            showToast(getString(R.string.bluetooth_not_supported))
+            return
+        }
+        if (!adapter.isEnabled) {
+            enableBtLauncher.launch(Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE))
+            return
+        }
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.S) {
+            val lm = getSystemService(LocationManager::class.java)
+            if (lm != null && !lm.isLocationEnabled) {
+                showToast(getString(R.string.location_required_for_scan))
+            }
+        }
+
         discoveredDevices.clear()
-        deviceAdapter.submitList(emptyList())
+        addBondedDevices()
         binding.tvNoDevices.visibility = View.GONE
         binding.cardDevices.visibility = View.VISIBLE
         binding.cardDevices.alpha = 0f
         binding.cardDevices.animate().alpha(1f).setDuration(400).start()
+        publishDeviceList()
 
         binding.btnScan.text = "Scan en cours…"
         binding.btnScan.isEnabled = false
 
-        bluetoothAdapter?.cancelDiscovery()
-        val started = bluetoothAdapter?.startDiscovery() == true
+        adapter.cancelDiscovery()
+        val started = adapter.startDiscovery()
         if (!started) {
+            Log.w(TAG, "startDiscovery() returned false")
             showToast("Impossible de démarrer la découverte")
             binding.btnScan.text = getString(R.string.btn_scan)
             binding.btnScan.isEnabled = true
+            publishDeviceList()
+        }
+    }
+
+    private fun addBondedDevices() {
+        val bonded = bluetoothAdapter?.bondedDevices ?: return
+        for (device in bonded) {
+            addDevice(device)
         }
     }
 
     private fun addDevice(device: BluetoothDevice) {
-        if (discoveredDevices.add(device)) {
-            deviceAdapter.submitList(discoveredDevices.toList())
+        if (!BluetoothScanFilter.accepts(device)) return
+        Log.d(
+            TAG,
+            "device ${device.address} name=${device.name} class=${device.bluetoothClass} " +
+                "type=${device.type} bond=${device.bondState}"
+        )
+        discoveredDevices[device.address] = device
+        publishDeviceList()
+    }
+
+    private fun publishDeviceList() {
+        val items = discoveredDevices.values.sortedWith(
+            compareByDescending<BluetoothDevice> { it.bondState == BluetoothDevice.BOND_BONDED }
+                .thenBy { it.name ?: it.address }
+        )
+        deviceAdapter.submitList(items)
+        binding.tvNoDevices.visibility = if (items.isEmpty()) View.VISIBLE else View.GONE
+    }
+
+    private fun connectToSelected(device: BluetoothDevice) {
+        pendingConnect = device
+        bluetoothAdapter?.cancelDiscovery()
+        startHidService()
+        val label = device.name ?: device.address
+        if (device.bondState != BluetoothDevice.BOND_BONDED) {
+            showToast(getString(R.string.bonding_device, label))
+            device.createBond()
+            return
         }
+        showToast(getString(R.string.connecting_to, label))
+        attemptPendingConnect()
+    }
+
+    private fun attemptPendingConnect() {
+        val device = pendingConnect ?: return
+        hidService?.connectToDevice(device)
     }
 
     // ── Permissions ────────────────────────────────────────────────────────────
+    private fun hasPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED
+    }
+
     private fun hasBluetoothPermissions(): Boolean {
-        val perms = mutableListOf(
-            Manifest.permission.BLUETOOTH_CONNECT,
-            Manifest.permission.BLUETOOTH_SCAN,
-            Manifest.permission.BLUETOOTH_ADVERTISE
-        )
-        return perms.all { ContextCompat.checkSelfPermission(this, it) == PackageManager.PERMISSION_GRANTED }
+        return BluetoothPermissions.requiredForScan(Build.VERSION.SDK_INT).all { hasPermission(it) }
     }
 
     private fun requestPermissions() {
-        permissionLauncher.launch(
-            arrayOf(
-                Manifest.permission.BLUETOOTH_CONNECT,
-                Manifest.permission.BLUETOOTH_SCAN,
-                Manifest.permission.BLUETOOTH_ADVERTISE
-            )
-        )
+        permissionLauncher.launch(BluetoothPermissions.requestedAtRuntime(Build.VERSION.SDK_INT))
     }
 
     private fun showToast(msg: String) = Toast.makeText(this, msg, Toast.LENGTH_SHORT).show()
+
+    companion object {
+        private const val TAG = "MaNetteScan"
+    }
 }

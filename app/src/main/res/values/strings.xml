@@ -13,9 +13,14 @@
     <string name="status_scanning">Recherche en cours…</string>
     <string name="status_connecting">Connexion…</string>
     <string name="status_connected">Connecté</string>
-    <string name="no_devices_found">Aucun appareil trouvé</string>
+    <string name="no_devices_found">Aucun appareil trouvé. Rendez le PC visible dans ses réglages Bluetooth, ou associez-le d\'abord au téléphone.</string>
     <string name="bluetooth_not_supported">Bluetooth HID non supporté</string>
     <string name="bt_enable_required">Veuillez activer le Bluetooth</string>
+    <string name="bt_enable_failed">Bluetooth désactivé — impossible de scanner</string>
+    <string name="location_required_for_scan">Activez la localisation pour détecter les appareils Bluetooth</string>
+    <string name="connecting_to">Connexion à %1$s…</string>
+    <string name="scan_devices_heading">Appareils associés et détectés</string>
+    <string name="bonding_device">Association avec %1$s…</string>
 
     <!-- Gamepad Screen -->
     <string name="gamepad_title">Manette active</string>

@@ -17,8 +17,8 @@ android {
     applicationId = "com.aistudio.manette.btgamepad"
     minSdk = 28
     targetSdk = 36
-    versionCode = 2
-    versionName = "2.0"
+    versionCode = 3
+    versionName = "2.0.1"
 
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
@@ -44,7 +44,10 @@ android {
       isCrunchPngs = false
       isMinifyEnabled = false
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-      signingConfig = signingConfigs.getByName("release")
+      // Sideload fallback: AI Studio / this VM ship a debug-signed APK when no Play upload key is set.
+      signingConfig = signingConfigs.getByName(
+        if (System.getenv("STORE_PASSWORD").isNullOrBlank()) "debugConfig" else "release"
+      )
     }
     debug { signingConfig = signingConfigs.getByName("debugConfig") }
   }
