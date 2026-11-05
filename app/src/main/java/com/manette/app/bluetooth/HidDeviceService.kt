@@ -55,6 +55,7 @@ class HidDeviceService : Service() {
     // ── Bluetooth ─────────────────────────────────────────────────────────────
     private var bluetoothHidDevice: BluetoothHidDevice? = null
     private var hostDevice: BluetoothDevice? = null
+    private var pendingHost: BluetoothDevice? = null
     private val executor = Executors.newSingleThreadExecutor()
 
     // ── Current gamepad report ─────────────────────────────────────────────────
@@ -88,6 +89,7 @@ class HidDeviceService : Service() {
             Log.d(TAG, "App status changed: registered=$registered, device=$pluggedDevice")
             if (registered) {
                 _state.value = ConnectionState.READY
+                tryConnectPending()
             } else {
                 _state.value = ConnectionState.IDLE
             }
@@ -103,10 +105,15 @@ class HidDeviceService : Service() {
                     Log.i(TAG, "HID connected to ${device.name}")
                 }
                 BluetoothProfile.STATE_DISCONNECTED -> {
+                    val previous = hostDevice
                     hostDevice = null
                     _connectedDevice.value = null
                     _state.value = ConnectionState.READY
                     currentReport.reset()
+                    val pending = pendingHost
+                    if (pending != null && pending.address != previous?.address) {
+                        tryConnectPending()
+                    }
                 }
                 BluetoothProfile.STATE_CONNECTING -> {
                     _state.value = ConnectionState.REGISTERING
@@ -187,7 +194,11 @@ class HidDeviceService : Service() {
                 _state.value = ConnectionState.READY
                 return
             }
-            adapter.getProfileProxy(this, profileListener, BluetoothProfile.HID_DEVICE)
+            val ok = adapter.getProfileProxy(this, profileListener, BluetoothProfile.HID_DEVICE)
+            if (!ok) {
+                Log.e(TAG, "HID_DEVICE profile proxy unavailable")
+                _state.value = ConnectionState.ERROR
+            }
         } catch (e: SecurityException) {
             Log.w(TAG, "Permission Bluetooth manquante — mode simulation actif: ${e.message}")
             _state.value = ConnectionState.READY
@@ -202,8 +213,33 @@ class HidDeviceService : Service() {
      * Connect to a specific Bluetooth device as HID host.
      */
     fun connectToDevice(device: BluetoothDevice) {
+        pendingHost = device
+        val hid = bluetoothHidDevice
+        val current = hostDevice
+        if (hid != null && current != null && current.address != device.address) {
+            try {
+                hid.disconnect(current)
+            } catch (e: SecurityException) {
+                Log.w(TAG, "Cannot disconnect current HID host: ${e.message}")
+            }
+            return
+        }
+        tryConnectPending()
+    }
+
+    private fun tryConnectPending() {
+        val device = pendingHost ?: return
+        val hid = bluetoothHidDevice ?: return
+        if (_state.value != ConnectionState.READY && _state.value != ConnectionState.CONNECTED) {
+            Log.d(TAG, "HID app not ready yet, will connect to ${device.address} when registered")
+            return
+        }
         try {
-            bluetoothHidDevice?.connect(device)
+            val started = hid.connect(device)
+            Log.i(TAG, "HID connect(${device.address}) started=$started")
+            if (started) {
+                pendingHost = null
+            }
         } catch (e: SecurityException) {
             Log.w(TAG, "Cannot connect to HID device: ${e.message}")
         }
