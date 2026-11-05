@@ -1,0 +1,6 @@
+{
+  "name": "MaNette",
+  "description": "Transformez votre smartphone en manette Bluetooth HID ultra-fluide pour PC et consoles, avec interface personnalisable et design Watermorphism.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

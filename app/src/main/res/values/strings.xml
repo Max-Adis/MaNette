@@ -33,4 +33,10 @@
     <!-- Permissions -->
     <string name="perm_bluetooth_rationale">MaNette a besoin du Bluetooth pour se connecter au PC comme manette HID.</string>
     <string name="perm_denied">Permission refusée – Bluetooth requis</string>
+
+    <!-- À propos / Version & Concepteur -->
+    <string name="app_version_badge">Version 2.0 • Concepteur : MaxAdis</string>
+    <string name="about_card_title">ℹ  À propos de l\'application</string>
+    <string name="about_version_label">Version : v2.0 Pro (Édition 3D &amp; Haptique)</string>
+    <string name="about_designer_label">Concepteur &amp; Développeur : MaxAdis</string>
 </resources>

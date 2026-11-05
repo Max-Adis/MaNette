@@ -191,7 +191,7 @@
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
 
-            <!-- Launch gamepad button (shown when connected) -->
+            <!-- Launch gamepad button -->
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btnStartGamepad"
                 android:layout_width="match_parent"
@@ -203,7 +203,97 @@
                 android:background="@drawable/btn_primary"
                 app:cornerRadius="16dp"
                 app:backgroundTint="@null"
-                android:visibility="gone" />
+                android:visibility="visible" />
+
+            <!-- Paramètres Card (Retour Haptique / Vibrations) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardSettings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="#14FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#33FFFFFF"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:padding="18dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginEnd="12dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="⚙  Paramètres — Retour haptique"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="Vibrer lors de l'appui sur les boutons et les sticks analogiques 3D"
+                            android:textSize="12sp"
+                            android:textColor="@color/manette_blue_pale" />
+                    </LinearLayout>
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/switchHaptic"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Bouton À propos (fermé de l'extérieur : affiche son contenu uniquement au clic) -->
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardAbout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                app:cardBackgroundColor="#14FFFFFF"
+                app:cardCornerRadius="20dp"
+                app:cardElevation="0dp"
+                app:strokeColor="#33FFFFFF"
+                app:strokeWidth="1dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:paddingHorizontal="18dp"
+                    android:paddingVertical="16dp">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="ℹ  À propos"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="›"
+                        android:textSize="20sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/manette_blue_pale" />
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
 
             <!-- Spacer for wave -->
             <View

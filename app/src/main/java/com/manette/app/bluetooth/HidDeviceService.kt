@@ -167,22 +167,34 @@ class HidDeviceService : Service() {
 
     override fun onDestroy() {
         super.onDestroy()
-        bluetoothHidDevice?.unregisterApp()
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        bluetoothManager.adapter?.closeProfileProxy(BluetoothProfile.HID_DEVICE, bluetoothHidDevice)
+        try {
+            bluetoothHidDevice?.unregisterApp()
+            val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager
+            bluetoothManager?.adapter?.closeProfileProxy(BluetoothProfile.HID_DEVICE, bluetoothHidDevice)
+        } catch (e: Exception) {
+            Log.w(TAG, "Cleanup Bluetooth HID proxy: ${e.message}")
+        }
         executor.shutdown()
     }
 
     // ── Init ──────────────────────────────────────────────────────────────────
     private fun initBluetooth() {
-        val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as BluetoothManager
-        val adapter = bluetoothManager.adapter
-        if (adapter == null || !adapter.isEnabled) {
-            Log.e(TAG, "Bluetooth not available or not enabled")
-            _state.value = ConnectionState.ERROR
-            return
+        try {
+            val bluetoothManager = getSystemService(Context.BLUETOOTH_SERVICE) as? BluetoothManager
+            val adapter = bluetoothManager?.adapter
+            if (adapter == null || !adapter.isEnabled) {
+                Log.i(TAG, "Bluetooth non disponible ou désactivé — mode simulation actif")
+                _state.value = ConnectionState.READY
+                return
+            }
+            adapter.getProfileProxy(this, profileListener, BluetoothProfile.HID_DEVICE)
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Permission Bluetooth manquante — mode simulation actif: ${e.message}")
+            _state.value = ConnectionState.READY
+        } catch (e: Exception) {
+            Log.w(TAG, "Initialisation Bluetooth ignorée: ${e.message}")
+            _state.value = ConnectionState.READY
         }
-        adapter.getProfileProxy(this, profileListener, BluetoothProfile.HID_DEVICE)
     }
 
     // ── Public API ────────────────────────────────────────────────────────────
@@ -190,14 +202,22 @@ class HidDeviceService : Service() {
      * Connect to a specific Bluetooth device as HID host.
      */
     fun connectToDevice(device: BluetoothDevice) {
-        bluetoothHidDevice?.connect(device)
+        try {
+            bluetoothHidDevice?.connect(device)
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Cannot connect to HID device: ${e.message}")
+        }
     }
 
     /**
      * Disconnect from current host.
      */
     fun disconnect() {
-        hostDevice?.let { bluetoothHidDevice?.disconnect(it) }
+        try {
+            hostDevice?.let { bluetoothHidDevice?.disconnect(it) }
+        } catch (e: SecurityException) {
+            Log.w(TAG, "Cannot disconnect HID device: ${e.message}")
+        }
     }
 
     /**
@@ -209,7 +229,7 @@ class HidDeviceService : Service() {
         return try {
             hidDev.sendReport(device, 0, report.toByteArray())
         } catch (e: Exception) {
-            Log.e(TAG, "Failed to send HID report: ${e.message}")
+            Log.w(TAG, "Failed to send HID report: ${e.message}")
             false
         }
     }

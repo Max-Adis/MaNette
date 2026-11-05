@@ -2,19 +2,21 @@ package com.manette.app.views
 
 import android.content.Context
 import android.graphics.Canvas
-import android.graphics.LinearGradient
 import android.graphics.Paint
-import android.graphics.Path
-import android.graphics.RectF
-import android.graphics.Shader
+import android.graphics.Rect
 import android.util.AttributeSet
+import android.view.HapticFeedbackConstants
 import android.view.MotionEvent
 import android.view.View
 import com.manette.app.hid.DPadDirection
+import com.manette.app.util.HapticManager
+import kotlin.math.hypot
+import kotlin.math.min
 
 /**
- * D-Pad custom view – Style manette physique blanche & bleue.
- * Dessine une croix directionnelle en bleu avec effet 3D.
+ * Invisible-at-rest D-Pad overlay view aligned over the enlarged photorealistic D-Pad
+ * on the controller image. Draws a pixel-exact 3D sunken ("enfoncé") depression effect
+ * directly on the pixels of the directional arm(s) currently pressed.
  */
 class DPadView @JvmOverloads constructor(
     context: Context,
@@ -28,112 +30,98 @@ class DPadView @JvmOverloads constructor(
     var listener: DPadListener? = null
 
     private var currentDirection: Byte = DPadDirection.CENTER
-    private val armRect = RectF()
-    private val centerRect = RectF()
 
-    // ── Palette bleue ──────────────────────────────────────────────────────────
-    // Bras normaux : bleu dégradé (haut = clair, bas = foncé)
-    private val normalPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0xFF3D6A9E.toInt()
-        style = Paint.Style.FILL
-    }
-    // Bras pressé : bleu très foncé
-    private val pressedPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0xFF1A3558.toInt()
-        style = Paint.Style.FILL
-    }
-    // Bordure : bleu lumineux
-    private val borderPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0xFF6A9FD4.toInt()
-        style = Paint.Style.STROKE
-        strokeWidth = 2f
-    }
-    // Flèches blanches
-    private val arrowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0xE0FFFFFF.toInt()
-        style = Paint.Style.FILL
-    }
-    // Ombre portée
-    private val shadowPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0x333D6A9E.toInt()
-        style = Paint.Style.FILL
-    }
-    // Reflet supérieur
-    private val highlightPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
-        color = 0x408AB4D8.toInt()
-        style = Paint.Style.FILL
-    }
-
-    // Pressed states
     private var upPressed = false
     private var downPressed = false
     private var leftPressed = false
     private var rightPressed = false
 
-    private var size = 0f
-    private val armWidth get() = size / 3.2f
-    private val armLength get() = size / 3.2f
-    private val cornerRadius = 10f
-
-    override fun onSizeChanged(w: Int, h: Int, oldw: Int, oldh: Int) {
-        super.onSizeChanged(w, h, oldw, oldh)
-        size = minOf(w, h).toFloat()
-    }
+    private val bmpPaint = Paint(Paint.ANTI_ALIAS_FLAG or Paint.FILTER_BITMAP_FLAG)
+    private val dstRect = Rect()
 
     override fun onDraw(canvas: Canvas) {
-        // Dessin désactivé : l'image de fond contient déjà le visuel du D-Pad.
-        // Cette vue gère uniquement la détection tactile.
-    }
+        super.onDraw(canvas)
+        // 100% invisible at rest so the authentic photorealistic D-Pad on manette.jpg is shown untouched
+        if (!upPressed && !downPressed && !leftPressed && !rightPressed) return
 
-    private fun drawArrow(canvas: Canvas, x: Float, y: Float, rotation: Float) {
-        canvas.save()
-        canvas.rotate(rotation, x, y)
-        val s = armWidth * 0.28f
-        val path = Path().apply {
-            moveTo(x, y - s)
-            lineTo(x + s * 0.75f, y + s * 0.55f)
-            lineTo(x - s * 0.75f, y + s * 0.55f)
-            close()
+        val bounds = ManettePixelEffect.parseBounds(tag as? String) ?: return
+        dstRect.set(0, 0, width, height)
+
+        if (upPressed) {
+            val bmp = ManettePixelEffect.getDPadArmBitmap(context, "UP", bounds[0], bounds[1], bounds[2], bounds[3])
+            canvas.drawBitmap(bmp, null, dstRect, bmpPaint)
         }
-        canvas.drawPath(path, arrowPaint)
-        canvas.restore()
+        if (downPressed) {
+            val bmp = ManettePixelEffect.getDPadArmBitmap(context, "DOWN", bounds[0], bounds[1], bounds[2], bounds[3])
+            canvas.drawBitmap(bmp, null, dstRect, bmpPaint)
+        }
+        if (leftPressed) {
+            val bmp = ManettePixelEffect.getDPadArmBitmap(context, "LEFT", bounds[0], bounds[1], bounds[2], bounds[3])
+            canvas.drawBitmap(bmp, null, dstRect, bmpPaint)
+        }
+        if (rightPressed) {
+            val bmp = ManettePixelEffect.getDPadArmBitmap(context, "RIGHT", bounds[0], bounds[1], bounds[2], bounds[3])
+            canvas.drawBitmap(bmp, null, dstRect, bmpPaint)
+        }
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
         val cx = width / 2f
         val cy = height / 2f
-        val arm = armWidth
-        val len = armLength
+        val size = min(width, height).toFloat()
+        val deadZone = size * 0.08f
 
         when (event.actionMasked) {
             MotionEvent.ACTION_DOWN, MotionEvent.ACTION_MOVE -> {
-                val tx = event.x
-                val ty = event.y
+                val dx = event.x - cx
+                val dy = event.y - cy
+                val dist = hypot(dx, dy)
 
-                upPressed    = ty < cy - arm / 2 && ty > cy - arm / 2 - len && tx in (cx - arm / 2)..(cx + arm / 2)
-                downPressed  = ty > cy + arm / 2 && ty < cy + arm / 2 + len && tx in (cx - arm / 2)..(cx + arm / 2)
-                leftPressed  = tx < cx - arm / 2 && tx > cx - arm / 2 - len && ty in (cy - arm / 2)..(cy + arm / 2)
-                rightPressed = tx > cx + arm / 2 && tx < cx + arm / 2 + len && ty in (cy - arm / 2)..(cy + arm / 2)
+                val prevDirection = currentDirection
+                if (dist < deadZone) {
+                    upPressed = false; downPressed = false
+                    leftPressed = false; rightPressed = false
+                    currentDirection = DPadDirection.CENTER
+                } else {
+                    val threshold = size * 0.13f
+                    upPressed = dy < -threshold
+                    downPressed = dy > threshold
+                    leftPressed = dx < -threshold
+                    rightPressed = dx > threshold
 
-                currentDirection = when {
-                    upPressed && leftPressed   -> DPadDirection.UP_LEFT
-                    upPressed && rightPressed  -> DPadDirection.UP_RIGHT
-                    downPressed && leftPressed -> DPadDirection.DOWN_LEFT
-                    downPressed && rightPressed-> DPadDirection.DOWN_RIGHT
-                    upPressed                  -> DPadDirection.UP
-                    downPressed                -> DPadDirection.DOWN
-                    leftPressed                -> DPadDirection.LEFT
-                    rightPressed               -> DPadDirection.RIGHT
-                    else                       -> DPadDirection.CENTER
+                    currentDirection = when {
+                        upPressed && leftPressed -> DPadDirection.UP_LEFT
+                        upPressed && rightPressed -> DPadDirection.UP_RIGHT
+                        downPressed && leftPressed -> DPadDirection.DOWN_LEFT
+                        downPressed && rightPressed -> DPadDirection.DOWN_RIGHT
+                        upPressed -> DPadDirection.UP
+                        downPressed -> DPadDirection.DOWN
+                        leftPressed -> DPadDirection.LEFT
+                        rightPressed -> DPadDirection.RIGHT
+                        else -> DPadDirection.CENTER
+                    }
                 }
-                listener?.onDirection(currentDirection)
+
+                if (currentDirection != prevDirection) {
+                    if (currentDirection != DPadDirection.CENTER) {
+                        if (HapticManager.isHapticEnabled(context)) {
+                            HapticManager.vibrateDPadPress(context)
+                            performHapticFeedback(HapticFeedbackConstants.KEYBOARD_TAP)
+                        }
+                    }
+                    listener?.onDirection(currentDirection)
+                }
                 invalidate()
                 return true
             }
             MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
+                val wasActive = currentDirection != DPadDirection.CENTER
                 upPressed = false; downPressed = false
                 leftPressed = false; rightPressed = false
                 currentDirection = DPadDirection.CENTER
+                if (wasActive && HapticManager.isHapticEnabled(context)) {
+                    HapticManager.vibrateButtonRelease(context)
+                }
                 listener?.onDirection(currentDirection)
                 invalidate()
                 return true

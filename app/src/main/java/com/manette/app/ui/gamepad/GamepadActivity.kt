@@ -127,14 +127,47 @@ class GamepadActivity : AppCompatActivity() {
         binding.dpadView.listener = object : DPadView.DPadListener {
             override fun onDirection(direction: Byte) {
                 report.dpad = direction
-                if (direction != DPadDirection.CENTER) vibrate(12)
                 updateDebugOverlay()
             }
         }
     }
 
     private fun setupButtons() {
-        // ABXY + L + R + SELECT + START
+        // Configure 3D styles and labels
+        binding.btnY.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.ACTION_CIRCLE
+            buttonLabel = "Y"
+        }
+        binding.btnX.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.ACTION_CIRCLE
+            buttonLabel = "X"
+        }
+        binding.btnB.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.ACTION_CIRCLE
+            buttonLabel = "B"
+        }
+        binding.btnA.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.ACTION_CIRCLE
+            buttonLabel = "A"
+        }
+        binding.btnSelect.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.PILL_CENTER
+            buttonLabel = "SELECT"
+        }
+        binding.btnStart.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.PILL_CENTER
+            buttonLabel = "START"
+        }
+        binding.btnL.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.SHOULDER_L
+            buttonLabel = "L"
+        }
+        binding.btnR.apply {
+            buttonStyle = com.manette.app.views.GamepadButtonView.Style.SHOULDER_R
+            buttonLabel = "R"
+        }
+
+        // Bind HID masks & haptic feedback
         setupGamepadButton(binding.btnA, ButtonMask.A)
         setupGamepadButton(binding.btnB, ButtonMask.B)
         setupGamepadButton(binding.btnX, ButtonMask.X)
@@ -145,24 +178,14 @@ class GamepadActivity : AppCompatActivity() {
         setupGamepadButton(binding.btnStart, ButtonMask.START)
     }
 
-    private fun setupGamepadButton(button: View, mask: Int) {
-        button.setOnTouchListener { _, event ->
-            when (event.action) {
-                MotionEvent.ACTION_DOWN -> {
-                    report.pressButton(mask)
-                    button.animate().scaleX(0.92f).scaleY(0.92f).setDuration(60).start()
-                    vibrate(18)
-                    updateDebugOverlay()
-                    true
-                }
-                MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
-                    report.releaseButton(mask)
-                    button.animate().scaleX(1f).scaleY(1f).setDuration(80).start()
-                    updateDebugOverlay()
-                    true
-                }
-                else -> false
+    private fun setupGamepadButton(button: com.manette.app.views.GamepadButtonView, mask: Int) {
+        button.onButtonStateChanged = { pressed ->
+            if (pressed) {
+                report.pressButton(mask)
+            } else {
+                report.releaseButton(mask)
             }
+            updateDebugOverlay()
         }
     }
 
@@ -171,6 +194,10 @@ class GamepadActivity : AppCompatActivity() {
             debugVisible = !debugVisible
             binding.cardDebug.visibility = if (debugVisible) View.VISIBLE else View.GONE
             binding.cardDebug.animate().alpha(if (debugVisible) 1f else 0f).setDuration(200).start()
+        }
+
+        binding.btnSettings.setOnClickListener {
+            com.manette.app.util.HapticManager.showSettingsDialog(this)
         }
 
         binding.btnHome.setOnClickListener {
@@ -209,6 +236,7 @@ class GamepadActivity : AppCompatActivity() {
 
     // ── Haptic feedback ────────────────────────────────────────────────────────
     private fun vibrate(ms: Long) {
+        if (!com.manette.app.util.HapticManager.isHapticEnabled(this)) return
         vibrator?.vibrate(VibrationEffect.createOneShot(ms, VibrationEffect.DEFAULT_AMPLITUDE))
     }
 
