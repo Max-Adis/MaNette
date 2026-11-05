@@ -157,6 +157,11 @@ class HomeActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        binding.switchHaptic.isChecked = com.manette.app.util.HapticManager.isHapticEnabled(this)
+    }
+
     private fun setupClickListeners() {
         binding.btnScan.setOnClickListener {
             if (hasBluetoothPermissions()) {
@@ -170,6 +175,24 @@ class HomeActivity : AppCompatActivity() {
         binding.btnStartGamepad.setOnClickListener {
             startActivity(Intent(this, GamepadActivity::class.java))
             overridePendingTransition(R.anim.slide_up_in, R.anim.fade_out)
+        }
+
+        binding.switchHaptic.isChecked = com.manette.app.util.HapticManager.isHapticEnabled(this)
+        binding.switchHaptic.setOnCheckedChangeListener { _, isChecked ->
+            com.manette.app.util.HapticManager.setHapticEnabled(this, isChecked)
+            if (isChecked) {
+                com.manette.app.util.HapticManager.vibrateButtonPress(this)
+            }
+        }
+
+        binding.cardSettings.setOnClickListener {
+            com.manette.app.util.HapticManager.showSettingsDialog(this) { enabled ->
+                binding.switchHaptic.isChecked = enabled
+            }
+        }
+
+        binding.cardAbout.setOnClickListener {
+            com.manette.app.util.HapticManager.showAboutDialog(this)
         }
     }
 
@@ -207,12 +230,10 @@ class HomeActivity : AppCompatActivity() {
                 if (device != null) {
                     binding.tvDeviceName.text = "PC: ${device.name ?: device.address}"
                     binding.tvDeviceName.visibility = View.VISIBLE
-                    binding.btnStartGamepad.visibility = View.VISIBLE
-                    binding.btnStartGamepad.animate().alpha(1f).setDuration(400).start()
                 } else {
                     binding.tvDeviceName.visibility = View.GONE
-                    binding.btnStartGamepad.visibility = View.GONE
                 }
+                binding.btnStartGamepad.visibility = View.VISIBLE
             }
         }
     }
