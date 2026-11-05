@@ -1,267 +1,229 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>MaNette 2.0 — Manette PC Bluetooth HID 3D &amp; Haptique | MaxAdis</title>
-    <meta name="description" content="Transformez votre smartphone Android en une manette Bluetooth HID 60Hz pour PC. Sticks analogiques 3D, retour haptique et zéro latence. Conçu par MaxAdis.">
-    <link rel="icon" type="image/png" href="assets/favicon.png">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Outfit:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MaNette 2.0 - Transformez votre Smartphone en Manette PC Bluetooth</title>
+    
+    <!-- Vérification Google Search Console -->
+    <meta name="google-site-verification" content="9KnzAROV94kBgJhmhX6T69Rsx8S5ILjVK7eQ_0QUvH4" />
+
+    <!-- SEO Google & Moteurs de recherche -->
+    <meta name="description" content="MaNette 2.0 : transformez votre smartphone Android en manette Bluetooth HID pour PC. Sticks analogiques 3D, retour haptique, zéro latence. Téléchargement gratuit.">
+    <meta name="keywords" content="manette virtuelle pc, transformer smartphone en manette, manette bluetooth android pc, jouer sur pc avec téléphone, manette sans fil gratuite, MaNette 2.0">
+    <meta name="author" content="Maxadis">
+    <meta name="robots" content="index, follow">
+
+    <!-- SEO Réseaux Sociaux (Open Graph / Facebook / Discord / Twitter) -->
+    <meta property="og:title" content="MaNette 2.0 - Votre smartphone devient une manette PC">
+    <meta property="og:description" content="Version 2.0 : sticks analogiques 3D, retour haptique et Bluetooth HID sans latence. Gratuit.">
+    <meta property="og:type" content="website">
+
+    <!-- AEO & GEO : Données Structurées (Schema.org) pour les IA (ChatGPT, Google Gemini) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "MaNette",
+      "operatingSystem": "Android",
+      "applicationCategory": "GameApplication",
+      "softwareVersion": "2.0",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      },
+      "description": "L'application qui transforme votre smartphone Android en une manette de jeu Bluetooth sans latence pour votre PC. Version 2.0 : sticks 3D et retour haptique.",
+      "author": {
+        "@type": "Person",
+        "name": "Maxadis"
+      }
+    }
+    </script>
+
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="assets/favicon.png">
 </head>
 <body>
+    
+    <!-- Formes d'arrière-plan (Effet Eau / Gouttes) -->
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    <div class="bg-shape shape-3"></div>
 
-<!-- ============================================================================
-     1. DRIFTLAB-INSPIRED 750VH WEBGL2 3D SCROLL STAGE (MANETTE GYMNASTICS)
-     ============================================================================ -->
-<div class="track" id="track">
-    <div class="view">
-        <canvas id="gl" aria-label="Manette 3D flottante effectuant des acrobaties pendant que des mots géants défilent derrière elle"></canvas>
+    <nav class="navbar glass">
+        <div class="logo-container">
+            <img src="assets/logo.jpg" alt="Logo MaNette" class="logo">
+            <span class="brand">MaNette</span>
+        </div>
+        <div class="nav-links">
+            <a href="#features">Fonctionnalités</a>
+            <a href="#versions">Versions</a>
+            <a href="#preview">Aperçu</a>
+            <a href="MaNette-v2.apk" class="btn-primary small" download="MaNette-v2.apk">Télécharger v2.0</a>
+        </div>
+    </nav>
 
-        <div class="ui">
-            <!-- Top-Left Brand Logo -->
-            <a class="logo" href="#" aria-label="MaNette 2.0">
-                <img src="assets/logo.jpg" alt="Logo MaNette">
-                <span>MaNette</span>
-                <svg viewBox="0 0 50 30" aria-hidden="true">
-                    <path d="M2 22C8 20 12 6 15 3c2-2-3 20-1 21 3 1 5-9 8-9-1 3-2 8 0 8 3 0 4-8 7-8s-1 8 2 8 5-6 8-6 2 4 9 2"/>
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Nouvelle version 2.0 · Android 9+</div>
+            <h1>Prenez le contrôle <br><span class="text-blue">absolu.</span></h1>
+            <p>Transformez votre smartphone Android en une véritable manette de jeu Bluetooth pour votre PC. Version 2.0 : sticks analogiques 3D, retour haptique, zéro câble, zéro latence.</p>
+            
+            <div class="cta-group">
+                <a href="MaNette-v2.apk" class="btn-download" download="MaNette-v2.apk">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                    Télécharger MaNette 2.0
+                </a>
+                <a href="#versions" class="btn-outline">Voir v2.0 et v1.0</a>
+            </div>
+            <div class="requirements">Compatible Android 9+ · Conçu par Maxadis</div>
+        </div>
+        
+        <div class="hero-image-container">
+            <img src="assets/manette.jpg" alt="Manette Blanche et Bleue" class="hero-image floating">
+            
+            <!-- Cercles décoratifs autour de l'image pour rappeler l'eau -->
+            <div class="ripple-circle ripple-1"></div>
+            <div class="ripple-circle ripple-2"></div>
+        </div>
+    </header>
+
+    <section id="features" class="features">
+        <h2 class="section-title">Nouveautés de la <span class="text-blue">version 2.0</span></h2>
+        <div class="grid">
+            <div class="card glass">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>
+                </div>
+                <h3>Zéro Latence</h3>
+                <p>Connexion Bluetooth HID 60 Hz. Votre PC reconnaît instantanément la manette, sans logiciel tiers.</p>
+            </div>
+            <div class="card glass">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><circle cx="12" cy="12" r="10"></circle><line x1="22" y1="12" x2="18" y2="12"></line><line x1="6" y1="12" x2="2" y2="12"></line><line x1="12" y1="6" x2="12" y2="2"></line><line x1="12" y1="22" x2="12" y2="18"></line></svg>
+                </div>
+                <h3>Sticks analogiques 3D</h3>
+                <p>Dômes 3D inclinables à 360°, gâchettes L/R incurvées et boutons Y, X, B, A avec effet d’enfoncement.</p>
+            </div>
+            <div class="card glass">
+                <div class="icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"></path></svg>
+                </div>
+                <h3>Retour haptique</h3>
+                <p>Vibrations Android à l’appui, au relâchement et en butée des sticks. Activable dans les Paramètres.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="versions" class="versions">
+        <h2 class="section-title">Choisissez votre <span class="text-blue">version</span></h2>
+        <div class="versions-grid">
+            <div class="version-card glass featured">
+                <span class="version-tag">Recommandé</span>
+                <h3>MaNette 2.0 Pro</h3>
+                <p>Sticks 3D, haptique, gâchettes incurvées. Fichier <code>MaNette-v2.apk</code>.</p>
+                <ul>
+                    <li>Sticks analogiques 3D à 360°</li>
+                    <li>Retour haptique configurable</li>
+                    <li>Écran À propos (Maxadis)</li>
+                </ul>
+                <a href="MaNette-v2.apk" class="btn-download" download="MaNette-v2.apk">Télécharger v2.0</a>
+            </div>
+            <div class="version-card glass">
+                <span class="version-tag classic">Classique</span>
+                <h3>MaNette 1.0</h3>
+                <p>L’édition originale, conservée. Fichier <code>MaNette.apk</code>.</p>
+                <ul>
+                    <li>Bluetooth HID natif</li>
+                    <li>Interface v1 légère</li>
+                    <li>Android 9+</li>
+                </ul>
+                <a href="MaNette.apk" class="btn-outline" download="MaNette.apk">Télécharger v1.0</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="benefits">
+        <h2 class="section-title">Oubliez les manettes <span class="text-blue">coûteuses</span></h2>
+        <div class="benefits-grid">
+            <div class="benefit-card glass">
+                <div class="icon-small">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><path d="M21 12V7H5a2 2 0 0 1 0-4h14v4"/><path d="M3 5v14a2 2 0 0 0 2 2h16v-5"/><path d="M18 12a2 2 0 0 0 0 4h4v-4Z"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <h3>Faites des économies</h3>
+                    <p>Fini les dépenses inutiles de 70€ ou 80€ pour une manette PC additionnelle. MaNette vous offre une expérience premium, 100% gratuitement.</p>
+                </div>
+            </div>
+            <div class="benefit-card glass">
+                <div class="icon-small">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><rect x="5" y="2" width="14" height="20" rx="2" ry="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <h3>Toujours dans votre poche</h3>
+                    <p>En voyage, chez des amis ou dans le train, vous avez toujours une manette sur vous. Aucun matériel lourd supplémentaire à transporter.</p>
+                </div>
+            </div>
+            <div class="benefit-card glass">
+                <div class="icon-small">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="modern-icon"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12"/></svg>
+                </div>
+                <div class="benefit-text">
+                    <h3>Geste Écologique</h3>
+                    <p>Moins de plastique, moins d'électronique obsolète. Exploitez toute la puissance des capteurs de votre téléphone au lieu d'acheter un accessoire de plus.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="preview" class="install-guide">
+        <div class="glass guide-card">
+            <h2>Comment jouer ?</h2>
+            <ol>
+                <li><strong>Téléchargez</strong> <code>MaNette-v2.apk</code> (ou <code>MaNette.apk</code> pour la v1) et installez-le sur votre smartphone.</li>
+                <li><strong>Autorisez</strong> l’installation depuis une source inconnue si Android le demande.</li>
+                <li><strong>Associez</strong> votre téléphone à votre PC via Bluetooth.</li>
+                <li><strong>Lancez</strong> l'application, appuyez sur "Lancer la manette".</li>
+                <li><strong>Jouez !</strong> Votre PC détecte une véritable manette de jeu.</li>
+            </ol>
+        </div>
+    </section>
+
+    <footer id="download">
+        <div class="footer-cta glass">
+            <h2>Prêt à plonger dans le jeu ?</h2>
+            <p>Téléchargez MaNette 2.0 et lancez votre première partie dans 2 minutes.</p>
+            <a href="MaNette-v2.apk" class="btn-download large" download="MaNette-v2.apk">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                    <polyline points="7 10 12 15 17 10"></polyline>
+                    <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                <span class="logo-badge">v2.0</span>
+                Obtenir MaNette 2.0 (Gratuit)
             </a>
-
-            <!-- Top-Right Navigation -->
-            <nav class="links" aria-label="Navigation principale">
-                <a href="#simulator" class="hide-mobile">[Simulateur 3D]</a>
-                <a href="#versions">[Versions v2 &amp; v1]</a>
-                <a href="MaNette-v2.apk" download="MaNette-v2.apk" class="cta-top">⬇ Télécharger v2.0</a>
-            </nav>
-
-            <!-- Left 01..05 Word Index -->
-            <div class="index" id="index" aria-hidden="true">
-                <i></i><b class="on">01</b>
-                <i></i><i></i><i></i><b>02</b>
-                <i></i><i></i><i></i><b>03</b>
-                <i></i><i></i><i></i><b>04</b>
-                <i></i><i></i><i></i><b>05</b><i></i>
-            </div>
-
-            <!-- Right Scroll Progress Rail -->
-            <div class="bar" aria-hidden="true"><i id="thumb"></i></div>
-
-            <!-- Bottom Center Captions + Download CTA -->
-            <div class="cap" id="capBox">
-                <svg class="goggle-icon" id="goggle" viewBox="0 0 30 20" aria-hidden="true">
-                    <path fill-rule="evenodd" d="M7 2h16a6 6 0 0 1 6 6v5a5 5 0 0 1-9 3l-2-3h-6l-2 3a5 5 0 0 1-9-3V8a6 6 0 0 1 6-6Zm1 5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Zm14 0a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7Z"/>
-                </svg>
-                <p id="c1">Transformez votre smartphone en manette PC Bluetooth HID 60Hz <br>Sticks analogiques 3D • Retour haptique • Zéro serveur</p>
-                <p id="c2" style="opacity:0">Faites défiler pour voir la manette en gymnastique 3D <br>Appuyez sur Télécharger pour jouer immédiatement</p>
-
-                <div class="cap-cta-wrap">
-                    <a href="MaNette-v2.apk" download="MaNette-v2.apk" class="hero-dl-pill">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Télécharger MaNette v2.0 (APK)
-                    </a>
-                    <a href="#versions" class="scroll-hint-pill">Voir v2.0 &amp; v1.0 ↓</a>
-                </div>
-            </div>
-
-            <!-- Left Panel (Appears at 0.72..0.86 while Controller flips to the right) -->
-            <div class="panel p1" id="p1">
-                <small>01 / PRÉCISION CHIRURGICALE 60HZ</small>
-                STICKS ANALOGIQUES 3D &amp; GÂCHETTES L/R INCURVÉES
-                <span class="panel-sub">Les dômes 3D s'inclinent à 360° sous vos pouces avec retour élastique et vibrations haptiques Android.</span>
-                <a href="MaNette-v2.apk" download="MaNette-v2.apk" class="panel-btn">⬇ Télécharger v2.0 Pro</a>
-            </div>
-
-            <!-- Right Panel (Appears at 0.88..1.00 while Controller flips to the left) -->
-            <div class="panel p2" id="p2">
-                <small>02 / CONÇU PAR MAXADIS</small>
-                CONNEXION BLUETOOTH HID NATIVE SANS PILOTE PC
-                <span class="panel-sub">Reconnu instantanément par Windows, Linux et Steam comme une vraie manette physique. Zéro câble, zéro achat.</span>
-                <a href="#versions" class="panel-btn">Choisir ma version (v2.0 / v1.0) →</a>
-            </div>
-
-            <!-- Bottom-Left 3D Spin / Sound Trigger Button -->
-            <button class="sound" id="sound" aria-pressed="true" aria-label="Déclencher une pirouette 3D et son">
-                <span aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></span>
-                <em style="font-style:normal" id="st">3D SPIN</em>
-            </button>
-
-            <!-- Bottom-Right Scroll Action Button -->
-            <button class="up" id="up" aria-label="Retour en haut">
-                <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 14V2M3 7l5-5 5 5"/></svg>
-            </button>
+            <p class="v1-footnote"><a href="MaNette.apk" download="MaNette.apk">Télécharger plutôt la version 1.0</a></p>
         </div>
-    </div>
-</div>
-
-<!-- ============================================================================
-     2. INTERACTIVE 3D SIMULATOR, VIDEO DEMO & DUAL APK DOWNLOADS
-     ============================================================================ -->
-<div class="content-wrapper">
-
-    <!-- Section Simulateur 3D + Vidéo -->
-    <section id="simulator" class="section-block">
-        <div class="container">
-            <div class="section-header">
-                <span class="eyebrow">Testez la Manette en Direct</span>
-                <h2>Simulateur 3D Interactif &amp; Démo Vidéo</h2>
-                <p>Glissez les sticks analogiques 3D ou cliquez sur les touches <strong>Y, X, B, A, L, R, D-Pad, SELECT, START</strong> pour observer l'effet d'enfoncement au pixel près.</p>
-            </div>
-
-            <div class="showcase-grid">
-                <!-- Interactive Canvas Card -->
-                <div class="glass-card">
-                    <div>
-                        <div class="card-top-bar">
-                            <span class="live-pill"><span class="live-dot"></span> Simulateur Tactile 3D Actif</span>
-                            <button type="button" class="mode-btn" id="toggleAutoDemoBtn">Mode Auto : ACTIF</button>
-                        </div>
-                        <div class="sim-canvas-wrap">
-                            <canvas id="controllerCanvas" width="1024" height="571"></canvas>
-                        </div>
-                        <div class="sim-hud">
-                            <span id="hudStickText">L.JS: (0, 0) | R.JS: (0, 0)</span>
-                            <strong id="hudActionText">Touchez un stick 3D ou un bouton !</strong>
-                        </div>
-                    </div>
-                    <div class="card-caption">
-                        <h3>Calibrage 1024 × 571 &amp; Gâchettes L/R Incurvées</h3>
-                        <p>Chaque bouton réagit exactement sur sa coque supérieure avec un assombrissement mécanique 3D et un retour haptique configurable.</p>
-                    </div>
-                </div>
-
-                <!-- Video Showcase Card -->
-                <div class="glass-card">
-                    <div>
-                        <div class="card-top-bar">
-                            <span class="live-pill"><span class="live-dot"></span> Capture Officielle v2.0</span>
-                            <span class="mode-btn">60 FPS • Bluetooth HID</span>
-                        </div>
-                        <div class="video-wrap">
-                            <video autoplay loop muted playsinline controls poster="assets/manette_v2.jpg">
-                                <source src="assets/demo_analogue_3d.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                    </div>
-                    <div class="card-caption">
-                        <h3>Sticks 3D Photoréalistes &amp; Retour Haptique</h3>
-                        <p>Visualisez la rotation 360° des sticks analogiques 3D, le retour élastique au centre et l'activation simultanée des touches.</p>
-                        <div style="margin-top: 16px;">
-                            <a href="MaNette-v2.apk" download="MaNette-v2.apk" class="btn-download primary">
-                                ⬇ Télécharger MaNette v2.0 Pro (APK)
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Téléchargement des 2 Versions (v2.0 Pro & v1.0 Classique conservée) -->
-    <section id="versions" class="section-block" style="padding-top: 20px;">
-        <div class="container">
-            <div class="section-header">
-                <span class="eyebrow">Téléchargement Direct &amp; Gratuit</span>
-                <h2>Choisissez Votre Version de MaNette</h2>
-                <p>La nouvelle <strong>Version 2.0 Pro</strong> est disponible aux côtés de la <strong>Version 1.0 Classique</strong> (conservée intacte sur le dépôt).</p>
-            </div>
-
-            <div class="versions-grid">
-                <!-- Version 2.0 Pro -->
-                <div class="version-card v2-featured">
-                    <div>
-                        <span class="version-ribbon">★ Nouvelle Version 2.0 — Recommandée</span>
-                        <h3>MaNette v2.0 Pro</h3>
-                        <p>La refonte complète avec sticks analogiques 3D animés, boutons agrandis, gâchettes L/R incurvées et retour haptique.</p>
-                        <ul class="version-list">
-                            <li>✅ <strong>Sticks Analogiques 3D</strong> mobiles à 360° avec retour élastique</li>
-                            <li>✅ <strong>Gâchettes L et R incurvées</strong> &amp; boutons Y, X, B, A agrandis</li>
-                            <li>✅ <strong>Retour Haptique (Vibration Android)</strong> activable dans les Paramètres</li>
-                            <li>✅ <strong>Menu À propos épuré</strong> (Version 2.0, Concepteur MaxAdis &amp; Contact)</li>
-                        </ul>
-                    </div>
-                    <a href="MaNette-v2.apk" download="MaNette-v2.apk" class="btn-download primary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Télécharger MaNette v2.0 (MaNette-v2.apk)
-                    </a>
-                </div>
-
-                <!-- Version 1.0 Classique (Conservée) -->
-                <div class="version-card">
-                    <div>
-                        <span class="version-ribbon classic">Version 1.0 Originale — Conservée</span>
-                        <h3>MaNette v1.0 Classique</h3>
-                        <p>L'édition originale de MaNette conservée intacte pour les utilisateurs souhaitant garder la première interface.</p>
-                        <ul class="version-list">
-                            <li>✅ <strong>Connexion Bluetooth HID 60Hz</strong> native sans serveur PC</li>
-                            <li>✅ <strong>Disposition classique v1.0</strong> légère et rapide</li>
-                            <li>✅ <strong>Compatible Android 9.0+</strong> (API 28 et supérieur)</li>
-                            <li>✅ <strong>Fichier original</strong> <code>MaNette.apk</code> préservé</li>
-                        </ul>
-                    </div>
-                    <a href="MaNette.apk" download="MaNette.apk" class="btn-download secondary">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-                        Télécharger MaNette v1.0 (MaNette.apk)
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Section Fonctionnalités -->
-    <section id="features" class="section-block" style="padding-top: 20px;">
-        <div class="container">
-            <div class="section-header">
-                <span class="eyebrow">Ingénierie &amp; Performance</span>
-                <h2>Pourquoi Télécharger MaNette 2.0 ?</h2>
-                <p>Tout a été pensé par <strong>MaxAdis</strong> pour offrir les sensations d'une véritable manette physique directement sur votre écran.</p>
-            </div>
-
-            <div class="features-grid">
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-                    </div>
-                    <h3>Zéro Latence (HID 60Hz)</h3>
-                    <p>Communication directe via le profil Bluetooth HID natif d'Android. Votre PC détecte instantanément une manette sans installer de serveur.</p>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
-                    </div>
-                    <h3>Sticks 3D &amp; Enfoncement Réel</h3>
-                    <p>Les sticks analogiques 3D bougent dans leur cavité et chaque bouton s'enfonce avec un rendu 3D calibré au pixel près.</p>
-                </div>
-
-                <div class="feature-box">
-                    <div class="feature-icon">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M2 12h2M20 12h2M6 8v8M18 8v8"/><rect x="9" y="5" width="6" height="14" rx="2"/></svg>
-                    </div>
-                    <h3>Retour Haptique Configurable</h3>
-                    <p>Ressentez chaque pression de bouton et chaque butée de stick grâce au moteur de vibration Android, activable ou désactivable en 1 clic.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
+        
+        <div class="footer-bottom">
             <div class="footer-grid">
-                <div class="footer-brand">
-                    <h3>🎮 MaNette 2.0</h3>
-                    <p>L'application innovante conçue par <strong>MaxAdis</strong> qui métamorphose votre smartphone Android en un contrôleur PC Bluetooth HID ultra-réactif.</p>
+                <div class="footer-col brand-col">
+                    <div class="logo-container">
+                        <img src="assets/logo.jpg" alt="Logo MaNette" class="logo">
+                        <span class="brand">MaNette</span>
+                    </div>
+                    <p class="brand-desc">L'application innovante qui métamorphose votre smartphone en un contrôleur PC ultra-réactif. Ne dépensez plus, jouez plus.</p>
                 </div>
                 <div class="footer-col">
                     <h4>Navigation</h4>
-                    <a href="#track">Animation 3D</a>
-                    <a href="#simulator">Simulateur 3D &amp; Vidéo</a>
-                    <a href="#versions">Versions v2.0 &amp; v1.0</a>
                     <a href="#features">Fonctionnalités</a>
+                    <a href="#versions">Versions</a>
+                    <a href="#preview">Installation</a>
                 </div>
                 <div class="footer-col">
                     <h4>Informations</h4>
@@ -270,897 +232,25 @@
                     <a href="politique.html">Politique de confidentialité</a>
                 </div>
                 <div class="footer-col">
-                    <h4>Contact &amp; Site Officiel</h4>
-                    <a href="https://manette-free.vercel.app/">🌐 manette-free.vercel.app</a>
-                    <a href="mailto:maxadisorg@gmail.com">✉ maxadisorg@gmail.com</a>
-                    <a href="tel:+2290154116425">📞 +229 01 54 11 64 25</a>
+                    <h4>Contact & Support</h4>
+                    <a href="mailto:maxadisorg@gmail.com" class="contact-info">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-icon"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                        maxadisorg@gmail.com
+                    </a>
+                    <a href="tel:+2290154116425" class="contact-info">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="contact-icon"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                        +229 01 54 11 64 25
+                    </a>
+                    <p style="margin-top: 15px; font-size: 0.95rem; color: var(--text-muted);">Vos avis comptent ! N'hésitez pas à nous écrire pour toute suggestion d'amélioration.</p>
                 </div>
             </div>
-            <div class="footer-bottom">
-                <span>© 2026 MaNette 2.0 — Application Bluetooth HID. Tous droits réservés.</span>
-                <span>Concepteur &amp; Développeur : <strong>MaxAdis</strong></span>
+            
+            <div class="footer-credits">
+                <p class="copyright">© 2026 MaNette. Application Bluetooth HID. Tous droits réservés.</p>
+                <p class="creator">Créé avec passion par <strong>Maxadis</strong></p>
             </div>
         </div>
     </footer>
-</div>
 
-<!-- ============================================================================
-     3. DRIFTLAB WEBGL2 ENGINE + 3D CONTROLLER GYMNASTICS + LIVE 3D SIMULATOR
-     ============================================================================ -->
-<script>
-(() => {
-    const CTRL_IMG_URL = "assets/manette_v2.jpg";
-    const WORDS = ["MANETTE 2.0", "ZÉRO LATENCE", "STICKS 3D", "HAPTIQUE", "JOUEZ SUR PC"];
-    const STEP = 0.14, GAP = 3.4, RADIUS = 9, CAM = 11, FOCAL = 8.14;
-    const $ = id => document.getElementById(id);
-    const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-    const smooth = (a, b, x) => { x = clamp((x - a) / (b - a)); return x * x * (3 - 2 * x); };
-    const ease = x => x * x * x * (x * (6 * x - 15) + 10);
-
-    const cv = $("gl");
-    const gl = cv.getContext("webgl2", { alpha: false, antialias: true, premultipliedAlpha: true });
-    const calm = matchMedia("(prefers-reduced-motion:reduce)").matches;
-
-    if (gl) {
-        function program(vs, fs, names) {
-            const sh = (t, s) => {
-                const o = gl.createShader(t);
-                gl.shaderSource(o, "#version 300 es\nprecision highp float;\n" + s);
-                gl.compileShader(o);
-                if (!gl.getShaderParameter(o, gl.COMPILE_STATUS)) console.error(gl.getShaderInfoLog(o));
-                return o;
-            };
-            const p = gl.createProgram();
-            gl.attachShader(p, sh(gl.VERTEX_SHADER, vs));
-            gl.attachShader(p, sh(gl.FRAGMENT_SHADER, fs));
-            gl.linkProgram(p);
-            const u = {};
-            names.forEach(n => u[n] = gl.getUniformLocation(p, n));
-            return { p, u };
-        }
-
-        const QUAD = `out vec2 v;void main(){vec2 c=vec2((gl_VertexID<<1)&2,gl_VertexID&2);v=c;gl_Position=vec4(c*2.-1.,0,1);}`;
-
-        // 1. Procedural Cyber-Azure Sky Shader
-        const skyP = program(QUAD, `
-            in vec2 v;
-            uniform vec3 C;
-            out vec4 O;
-            void main() {
-                vec2 uv = (v - 0.5) * C.xy + 0.5;
-                float t = C.z;
-                vec3 topCol = vec3(0.76, 0.88, 0.99);
-                vec3 midCol = vec3(0.88, 0.95, 1.00);
-                vec3 botCol = vec3(0.80, 0.90, 0.99);
-                vec3 col = mix(botCol, topCol, smoothstep(0.0, 1.0, uv.y));
-                float wave1 = sin(uv.x * 5.0 + t * 3.0 + uv.y * 2.5) * 0.5 + 0.5;
-                float wave2 = cos(uv.x * 3.5 - t * 2.2 - uv.y * 4.0) * 0.5 + 0.5;
-                col = mix(col, midCol, wave1 * 0.45);
-                col += vec3(0.05, 0.14, 0.28) * pow(wave1 * wave2, 3.0) * 0.22;
-                float vig = smoothstep(0.95, 0.15, length(v - 0.5));
-                col = mix(col * 0.94, col, vig);
-                O = vec4(col, 1.0);
-            }
-        `, ["C"]);
-
-        // 2. Curved 3D Word Ribbons Shader (Exact Driftlab Ring Geometry)
-        const wordP = program(`
-            layout(location=0) in vec2 a;
-            uniform vec4 W;
-            uniform vec4 B;
-            uniform float A;
-            uniform vec3 L;
-            out vec2 v;
-            void main() {
-                float t = (a.x - 0.5) * W.x + W.y;
-                float th = clamp(t / ${RADIUS.toFixed(1)}, -1.45, 1.45);
-                float x = ${RADIUS.toFixed(1)} * sin(th);
-                float z = ${RADIUS.toFixed(1)} * (1.0 - cos(th)) * 0.82;
-                float y = (a.y - 0.5) * L.x + L.y - L.z - 3.6 * pow(smoothstep(0.8, 8.0, t), 1.25) - 0.012 * t * t;
-                v = vec2(mix(B.x, B.z, a.x), mix(B.w, B.y, a.y));
-                gl_Position = vec4(x * ${FOCAL.toFixed(2)} / A, y * ${FOCAL.toFixed(2)}, 0.0, ${CAM.toFixed(1)} - z);
-            }
-        `, `
-            in vec2 v;
-            uniform sampler2D T;
-            out vec4 O;
-            void main() {
-                float a = texture(T, v).a;
-                vec3 ink = vec3(0.03, 0.08, 0.18);
-                O = vec4(ink * a, a);
-            }
-        `, ["W", "B", "A", "L", "T"]);
-
-        // 3. Floating Particles & Rotating Squares Shader
-        const dotP = program(`
-            layout(location=0) in vec4 a;
-            uniform float S, H, P;
-            out float k;
-            out float r;
-            void main() {
-                k = a.w;
-                float y = fract(a.y + S * 0.014 * (0.4 + a.z)) * 2.3 - 1.15;
-                float x = fract(a.x + H * (a.w > 0.5 ? 0.035 : 0.005)) * 2.4 - 1.2 + 0.03 * sin(S * 0.25 + a.z * 9.0);
-                gl_Position = vec4(x, y, 0.0, 1.0);
-                gl_PointSize = (a.w > 0.5 ? 6.0 + a.z * 15.0 : 6.0 + a.z * 24.0) * P;
-                r = S * 0.7 + a.z * 7.0 + H;
-            }
-        `, `
-            in float k;
-            in float r;
-            out vec4 O;
-            void main() {
-                vec2 p = gl_PointCoord - 0.5;
-                if (k > 0.5) {
-                    float c = cos(r), s = sin(r);
-                    p = mat2(c, -s, s, c) * p;
-                    float a = step(max(abs(p.x), abs(p.y)), 0.3);
-                    O = vec4(vec3(0.08, 0.24, 0.58) * a, a);
-                } else {
-                    float a = smoothstep(0.5, 0.1, length(p)) * 0.72;
-                    O = vec4(vec3(1.0) * a, a);
-                }
-            }
-        `, ["S", "H", "P"]);
-
-        // 4. 3D Acrobatics / Gymnastics Controller Shader (True 3D Perspective Pitch/Yaw/Roll + Dynamic Specular Light)
-        const ctrlP = program(`
-            layout(location=0) in vec2 a;
-            uniform vec3 uRot;    // pitch (X), yaw (Y), roll (Z)
-            uniform vec3 uPos;    // ox, oy, scale
-            uniform float uAsp;   // viewport aspect ratio
-            uniform float uBend;  // subtle 3D ergonomic shell relief
-            out vec2 v;
-            out vec3 vNorm;
-            void main() {
-                v = vec2(a.x, 1.0 - a.y);
-                float imgAsp = 1024.0 / 571.0;
-                vec2 p2 = (a - 0.5) * 2.0;
-                // Ergonomic 3D shell curvature
-                float arch = (1.0 - p2.x * p2.x * 0.35) * (1.0 - p2.y * p2.y * 0.25);
-                vec3 pos = vec3(p2.x * imgAsp * 0.58, p2.y * 0.58, arch * 0.09 * uBend);
-                vec3 nrm = normalize(vec3(-p2.x * 0.22, -p2.y * 0.18, 1.0));
-
-                // 3D Rotations: Pitch (X), Yaw (Y), Roll (Z)
-                float cx = cos(uRot.x), sx = sin(uRot.x);
-                float cy = cos(uRot.y), sy = sin(uRot.y);
-                float cz = cos(uRot.z), sz = sin(uRot.z);
-
-                mat3 rx = mat3(1.0, 0.0, 0.0,  0.0, cx, -sx,  0.0, sx, cx);
-                mat3 ry = mat3(cy, 0.0, sy,   0.0, 1.0, 0.0, -sy, 0.0, cy);
-                mat3 rz = mat3(cz, -sz, 0.0,  sz, cz, 0.0,   0.0, 0.0, 1.0);
-                mat3 R = rz * ry * rx;
-
-                vec3 rPos = R * (pos * uPos.z);
-                vNorm = R * nrm;
-
-                float camDist = 3.2;
-                float zDepth = camDist - rPos.z;
-                float fov = 2.65;
-                gl_Position = vec4(
-                    (rPos.x * fov / uAsp) + uPos.x * zDepth,
-                    (rPos.y * fov) + uPos.y * zDepth,
-                    0.0,
-                    zDepth
-                );
-            }
-        `, `
-            in vec2 v;
-            in vec3 vNorm;
-            uniform sampler2D T;
-            uniform float uTime;
-            out vec4 O;
-            void main() {
-                vec4 texCol = texture(T, v);
-                float a = texCol.a;
-                if (a < 0.01) discard;
-                vec3 n = normalize(vNorm);
-                vec3 lightDir = normalize(vec3(sin(uTime * 1.3) * 0.6, 0.55, 0.85));
-                float diff = abs(dot(n, lightDir));
-                float spec = pow(max(0.0, abs(n.z)), 6.0) * 0.14;
-                vec3 c = texCol.rgb * (0.86 + 0.18 * diff) + vec3(0.25, 0.55, 1.0) * spec * (1.0 - abs(n.z));
-                O = vec4(c * a, a);
-            }
-        `, ["uRot", "uPos", "uAsp", "uBend", "T", "uTime"]);
-
-        // Word Atlas: one row per word
-        const ROW = 512, EM = 410;
-        const atlas = document.createElement("canvas");
-        atlas.width = 4096;
-        atlas.height = ROW * WORDS.length;
-        let layout = [];
-
-        function drawAtlas() {
-            const x = atlas.getContext("2d");
-            x.clearRect(0, 0, atlas.width, atlas.height);
-            x.font = `${EM}px Anton, sans-serif`;
-            x.textBaseline = "alphabetic";
-            x.fillStyle = "#000";
-            x.textAlign = "left";
-            if ("letterSpacing" in x) x.letterSpacing = "8px";
-            let c = 0;
-            layout = [];
-            WORDS.forEach((w, i) => {
-                const m = Math.min(atlas.width - 32, x.measureText(w).width + 20);
-                x.fillText(w, 10, i * ROW + EM * 0.92 + 6);
-                const uW = (m / EM) * 0.86;
-                layout.push({
-                    len: uW,
-                    c: c + uW / 2,
-                    u: m / atlas.width,
-                    top: i / WORDS.length,
-                    bot: (i + 1) / WORDS.length
-                });
-                c += uW + GAP;
-            });
-        }
-
-        const tex = (unit, filter) => {
-            const t = gl.createTexture();
-            gl.activeTexture(gl.TEXTURE0 + unit);
-            gl.bindTexture(gl.TEXTURE_2D, t);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, filter);
-            gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
-            return t;
-        };
-
-        const tWords = tex(1, gl.LINEAR_MIPMAP_LINEAR);
-        const tCtrl = tex(2, gl.LINEAR);
-        const aniso = gl.getExtension("EXT_texture_filter_anisotropic");
-
-        // Ribbon geometry for words (56 columns)
-        const cols = 56, ribbon = new Float32Array((cols + 1) * 4);
-        for (let i = 0; i <= cols; i++) ribbon.set([i / cols, 0, i / cols, 1], i * 4);
-        const vaoW = gl.createVertexArray();
-        gl.bindVertexArray(vaoW);
-        gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-        gl.bufferData(gl.ARRAY_BUFFER, ribbon, gl.STATIC_DRAW);
-        gl.enableVertexAttribArray(0);
-        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-
-        // 3D Subdivided Grid for Controller (for smooth perspective & shell relief)
-        const cCols = 28, cRows = 16;
-        const ctrlVerts = [];
-        for (let r = 0; r < cRows; r++) {
-            const v0 = r / cRows, v1 = (r + 1) / cRows;
-            for (let c = 0; c <= cCols; c++) {
-                const u = c / cCols;
-                ctrlVerts.push(u, v0, u, v1);
-            }
-            // Degenerate triangles to link rows
-            ctrlVerts.push(1, v1, 0, v1);
-        }
-        const vaoCtrl = gl.createVertexArray();
-        gl.bindVertexArray(vaoCtrl);
-        gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(ctrlVerts), gl.STATIC_DRAW);
-        gl.enableVertexAttribArray(0);
-        gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
-        const ctrlVertCount = ctrlVerts.length / 2;
-
-        // 48 Floating Dots
-        const dots = [];
-        let sd = 7;
-        const rnd = () => (sd = (sd * 16807) % 2147483647) / 2147483647;
-        for (let i = 0; i < 48; i++) dots.push(rnd(), rnd(), rnd(), i % 4 ? 0 : 1);
-        const vaoD = gl.createVertexArray();
-        gl.bindVertexArray(vaoD);
-        gl.bindBuffer(gl.ARRAY_BUFFER, gl.createBuffer());
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(dots), gl.STATIC_DRAW);
-        gl.enableVertexAttribArray(0);
-        gl.vertexAttribPointer(0, 4, gl.FLOAT, false, 0, 0);
-
-        const vaoE = gl.createVertexArray();
-
-        // Offscreen Live Controller Canvas (transparent background + animated 3D sticks & button glows)
-        const ctrlCanvas = document.createElement("canvas");
-        ctrlCanvas.width = 1024;
-        ctrlCanvas.height = 571;
-        const ctrlCtx = ctrlCanvas.getContext("2d");
-
-        const baseCleanCanvas = document.createElement("canvas");
-        baseCleanCanvas.width = 1024;
-        baseCleanCanvas.height = 571;
-        let controllerReady = false;
-
-        function prepareTransparentController(img) {
-            const bctx = baseCleanCanvas.getContext("2d");
-            bctx.drawImage(img, 0, 0, 1024, 571);
-            const imgData = bctx.getImageData(0, 0, 1024, 571);
-            const d = imgData.data;
-            const W = 1024, H = 571;
-            const visited = new Uint8Array(W * H);
-            const queue = new Int32Array(W * H);
-            let qHead = 0, qTail = 0;
-
-            const isExteriorWhite = (idx) => {
-                const p = idx * 4;
-                const r = d[p], g = d[p + 1], b = d[p + 2];
-                // Keep everything inside the blue neon rim; flood-fill only outer white/light-gray pixels
-                return (r > 232 && g > 235 && b > 238) && (b - r < 22);
-            };
-
-            // Seed from all 4 borders
-            for (let x = 0; x < W; x++) {
-                let topIdx = x, botIdx = (H - 1) * W + x;
-                if (isExteriorWhite(topIdx)) { visited[topIdx] = 1; queue[qTail++] = topIdx; }
-                if (isExteriorWhite(botIdx)) { visited[botIdx] = 1; queue[qTail++] = botIdx; }
-            }
-            for (let y = 0; y < H; y++) {
-                let lIdx = y * W, rIdx = y * W + (W - 1);
-                if (isExteriorWhite(lIdx) && !visited[lIdx]) { visited[lIdx] = 1; queue[qTail++] = lIdx; }
-                if (isExteriorWhite(rIdx) && !visited[rIdx]) { visited[rIdx] = 1; queue[qTail++] = rIdx; }
-            }
-
-            while (qHead < qTail) {
-                const curr = queue[qHead++];
-                d[curr * 4 + 3] = 0;
-                const cx = curr % W, cy = (curr / W) | 0;
-                const neighbors = [
-                    cy > 0 ? curr - W : -1,
-                    cy < H - 1 ? curr + W : -1,
-                    cx > 0 ? curr - 1 : -1,
-                    cx < W - 1 ? curr + 1 : -1
-                ];
-                for (let n = 0; n < 4; n++) {
-                    const nb = neighbors[n];
-                    if (nb >= 0 && !visited[nb] && isExteriorWhite(nb)) {
-                        visited[nb] = 1;
-                        queue[qTail++] = nb;
-                    }
-                }
-            }
-
-            // Feather alpha along the outer boundary for anti-aliased edge
-            for (let y = 1; y < H - 1; y++) {
-                for (let x = 1; x < W - 1; x++) {
-                    const i = y * W + x;
-                    if (!visited[i]) {
-                        const emptyNb = visited[i - 1] + visited[i + 1] + visited[i - W] + visited[i + W];
-                        if (emptyNb > 0) {
-                            d[i * 4 + 3] = Math.round(255 * (1 - emptyNb * 0.18));
-                        }
-                    }
-                }
-            }
-            bctx.putImageData(imgData, 0, 0);
-            controllerReady = true;
-        }
-
-        function draw3DStickOnCtx(c, cx, cy, dx, dy) {
-            const cavR = 66;
-            const cavGrad = c.createRadialGradient(cx, cy, cavR * 0.1, cx, cy, cavR);
-            cavGrad.addColorStop(0, "#030914");
-            cavGrad.addColorStop(0.72, "#081832");
-            cavGrad.addColorStop(0.92, "#193A6A");
-            cavGrad.addColorStop(1, "rgba(25,58,106,0)");
-            c.beginPath();
-            c.arc(cx, cy, cavR, 0, Math.PI * 2);
-            c.fillStyle = cavGrad;
-            c.fill();
-
-            const tx = cx + dx, ty = cy + dy;
-            const capR = 49;
-            c.beginPath();
-            c.arc(tx + 4, ty + 8, capR * 1.04, 0, Math.PI * 2);
-            c.fillStyle = "rgba(0, 4, 12, 0.65)";
-            c.fill();
-
-            const rimGrad = c.createRadialGradient(tx - capR * 0.25, ty - capR * 0.25, capR * 0.1, tx, ty, capR);
-            rimGrad.addColorStop(0, "#3867A6");
-            rimGrad.addColorStop(0.55, "#1A3B6E");
-            rimGrad.addColorStop(0.88, "#0B1E40");
-            rimGrad.addColorStop(1, "#061229");
-            c.beginPath();
-            c.arc(tx, ty, capR, 0, Math.PI * 2);
-            c.fillStyle = rimGrad;
-            c.fill();
-
-            c.beginPath();
-            c.arc(tx, ty, capR * 0.88, 0, Math.PI * 2);
-            c.strokeStyle = "rgba(135, 195, 255, 0.48)";
-            c.lineWidth = 2.2;
-            c.stroke();
-
-            const domeR = capR * 0.68;
-            const domeGrad = c.createRadialGradient(tx + domeR * 0.22, ty + domeR * 0.22, domeR * 0.05, tx, ty, domeR);
-            domeGrad.addColorStop(0, "#244D8A");
-            domeGrad.addColorStop(0.65, "#102850");
-            domeGrad.addColorStop(1, "#081733");
-            c.beginPath();
-            c.arc(tx, ty, domeR, 0, Math.PI * 2);
-            c.fillStyle = domeGrad;
-            c.fill();
-        }
-
-        function updateLiveControllerTexture(sec, s) {
-            if (!controllerReady) return;
-            ctrlCtx.clearRect(0, 0, 1024, 571);
-            ctrlCtx.drawImage(baseCleanCanvas, 0, 0);
-
-            // Animated 3D Analog Sticks
-            const maxR = 32;
-            const lx = Math.cos(sec * 2.6 + s * 8) * maxR;
-            const ly = Math.sin(sec * 2.6 + s * 8) * maxR;
-            const rx = Math.cos(-sec * 3.1 + 1.2) * maxR;
-            const ry = Math.sin(-sec * 3.1 + 1.2) * maxR;
-            draw3DStickOnCtx(ctrlCtx, 402, 354, lx, ly);
-            draw3DStickOnCtx(ctrlCtx, 622, 354, rx, ry);
-
-            // Dynamic Sunken Button Highlight cycling through Y, B, A, X
-            const btns = [
-                { cx: 812.0, cy: 181.5, r: 37.5 },
-                { cx: 889.5, cy: 255.0, r: 37.5 },
-                { cx: 811.5, cy: 325.5, r: 37.5 },
-                { cx: 731.5, cy: 254.5, r: 37.5 }
-            ];
-            const bIdx = Math.floor(sec * 2.2) % btns.length;
-            const b = btns[bIdx];
-            const g = ctrlCtx.createRadialGradient(b.cx, b.cy, 2, b.cx, b.cy, b.r);
-            g.addColorStop(0, "rgba(2, 10, 26, 0.58)");
-            g.addColorStop(0.75, "rgba(5, 18, 42, 0.45)");
-            g.addColorStop(1, "rgba(56, 189, 248, 0.7)");
-            ctrlCtx.beginPath();
-            ctrlCtx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
-            ctrlCtx.fillStyle = g;
-            ctrlCtx.fill();
-
-            gl.activeTexture(gl.TEXTURE2);
-            gl.bindTexture(gl.TEXTURE_2D, tCtrl);
-            gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, false);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, ctrlCanvas);
-        }
-
-        let W = 1, H = 1, dpr = 1, asp = 1;
-        function size() {
-            dpr = Math.min(devicePixelRatio || 1, 2);
-            W = Math.round(cv.clientWidth * dpr);
-            H = Math.round(cv.clientHeight * dpr);
-            cv.width = W;
-            cv.height = H;
-            asp = W / H;
-            gl.viewport(0, 0, W, H);
-        }
-        addEventListener("resize", size);
-
-        let lastIdx = 0;
-        const marks = [...$("index").querySelectorAll("b")];
-
-        function ui(s, k) {
-            const op = (a, b, c, d) => smooth(a, b, s) * (1 - smooth(c, d, s));
-            const c1 = 1 - smooth(0.04, 0.09, s);
-            const c2 = op(0.09, 0.14, 0.56, 0.62);
-            $("c1").style.opacity = c1;
-            $("c2").style.opacity = c2;
-            $("goggle").style.opacity = Math.max(c1, c2);
-            $("capBox").style.opacity = 1 - smooth(0.64, 0.70, s);
-
-            const a = op(0.70, 0.75, 0.84, 0.88);
-            const b = op(0.89, 0.94, 1.1, 1.2);
-            $("p1").style.opacity = a;
-            $("p1").style.pointerEvents = a > 0.5 ? "auto" : "none";
-            $("p1").style.transform = asp > 0.85
-                ? `translateY(calc(-50% + ${(1 - a) * 20}px))`
-                : `translateY(${(1 - a) * 20}px)`;
-
-            $("p2").style.opacity = b;
-            $("p2").style.pointerEvents = b > 0.5 ? "auto" : "none";
-            $("p2").style.transform = asp > 0.85
-                ? `translateY(calc(-50% + ${(1 - b) * 20}px))`
-                : `translateY(${(1 - b) * 20}px)`;
-
-            const idx = clamp(Math.round(k), 0, marks.length - 1);
-            if (idx !== lastIdx) {
-                marks[lastIdx].classList.remove("on");
-                marks[idx].classList.add("on");
-                lastIdx = idx;
-            }
-            $("thumb").style.transform = `translateY(${(s * 1011).toFixed(1)}%)`;
-        }
-
-        let target = 0, now = 0, mx = 0, my = 0, tmx = 0, tmy = 0;
-        let bonusSpin = 0, targetBonusSpin = 0;
-
-        const read = () => {
-            const r = $("track").getBoundingClientRect();
-            const m = Math.max(1, r.height - innerHeight);
-            target = clamp(-r.top / m);
-        };
-        addEventListener("scroll", read, { passive: true });
-        addEventListener("pointermove", e => {
-            tmx = (e.clientX / innerWidth) * 2 - 1;
-            tmy = 1 - (e.clientY / innerHeight) * 2;
-        });
-
-        // Draw Frame (Sky -> Dots -> Curved 3D Words -> 3D Gymnastics Controller)
-        function draw(s, sec) {
-            updateLiveControllerTexture(sec, s);
-
-            const n = WORDS.length;
-            const span = STEP * (n - 1);
-            const k = clamp(s / span) * (n - 1);
-            const i = Math.min(n - 2, Math.floor(k));
-            const f = k - i;
-            const c0 = layout[i].c, c1 = layout[i + 1].c;
-            const head = c0 + (c1 - c0) * ease(f);
-            const sink = ease(smooth(span + 0.015, span + 0.105, s)) * 6.0;
-            const grow = ease(smooth(span + 0.08, span + 0.22, s));
-            const side = smooth(0.70, 0.77, s) - 2 * smooth(0.87, 0.94, s);
-
-            // 1. Sky
-            gl.disable(gl.BLEND);
-            gl.useProgram(skyP.p);
-            gl.bindVertexArray(vaoE);
-            const ca = asp / (16 / 9), fx = ca > 1 ? 1 : ca, fy = ca > 1 ? 1 / ca : 1;
-            gl.uniform3f(skyP.u.C, fx * 0.92, fy * 0.92, s * 0.08 + sec * 0.06);
-            gl.drawArrays(gl.TRIANGLES, 0, 3);
-
-            gl.enable(gl.BLEND);
-            gl.blendFunc(gl.ONE, gl.ONE_MINUS_SRC_ALPHA);
-
-            // 2. Floating Dots & Rotating Squares
-            gl.useProgram(dotP.p);
-            gl.bindVertexArray(vaoD);
-            gl.uniform1f(dotP.u.S, sec);
-            gl.uniform1f(dotP.u.H, head * 0.1 + s * 4.0);
-            gl.uniform1f(dotP.u.P, (dpr * H / dpr) / 900);
-            gl.drawArrays(gl.POINTS, 0, 48);
-
-            // 3. Curved 3D Word Ribbons
-            gl.useProgram(wordP.p);
-            gl.bindVertexArray(vaoW);
-            gl.uniform1i(wordP.u.T, 1);
-            gl.uniform1f(wordP.u.A, asp);
-            const hs = clamp(asp * 0.58, 0.28, 1.0);
-            gl.uniform3f(wordP.u.L, hs, 0.19 + 0.1 * (1 - hs), sink);
-            layout.forEach(w => {
-                const t = w.c - head;
-                if (Math.abs(t) > 24) return;
-                gl.uniform4f(wordP.u.W, w.len * hs, t * hs, 0, 0);
-                gl.uniform4f(wordP.u.B, 0, w.top, w.u, w.bot);
-                gl.drawArrays(gl.TRIANGLE_STRIP, 0, (cols + 1) * 2);
-            });
-
-            // 4. Floating MaNette Controller Performing 3D Gymnastics & Acrobatics!
-            gl.useProgram(ctrlP.p);
-            gl.bindVertexArray(vaoCtrl);
-            gl.uniform1i(ctrlP.u.T, 2);
-            gl.uniform1f(ctrlP.u.uAsp, asp);
-            gl.uniform1f(ctrlP.u.uBend, 1.0);
-            gl.uniform1f(ctrlP.u.uTime, sec);
-
-            // Gymnastics choreography driven by scroll progress `s`:
-            // - Smooth 360° pirouettes & barrel rolls during word transitions
-            // - Acrobatics flip when diving into the feature panels
-            const wordSpin = Math.sin(f * Math.PI); // peaks mid-transition between each giant word
-            const flip1 = ease(smooth(0.11, 0.24, s)) * Math.PI * 2.0; // Full 360° Yaw Spin
-            const flip2 = ease(smooth(0.26, 0.39, s)) * Math.PI * 2.0; // Full 360° Barrel Roll
-            const flip3 = ease(smooth(0.41, 0.54, s)) * Math.PI * 2.0; // Full 360° Pitch Backflip
-            const diveFlip = ease(smooth(0.57, 0.72, s)) * Math.PI * 2.0; // Helical 360° Dive
-            const crossFlip = ease(smooth(0.82, 0.93, s)) * Math.PI * 2.0; // Aerial Flip from Right to Left
-
-            const pitch = 0.16 * Math.sin(sec * 1.5) - my * 0.28 + flip3 + 0.35 * Math.sin(s * 18.0) + bonusSpin * 0.5;
-            const yaw   = 0.24 * Math.sin(sec * 1.1) + mx * 0.38 + flip1 + diveFlip + crossFlip + bonusSpin;
-            const roll  = 0.12 * Math.sin(s * 14.0 + 0.4) + 0.05 * Math.sin(sec * 0.9) + flip2 * 0.5 + wordSpin * 0.28;
-
-            // Responsive scale & position for both PC (asp >= 1) and Mobile (asp < 1)
-            const isMobile = asp < 0.85;
-            const baseScale = isMobile
-                ? clamp(asp * 1.42, 0.62, 0.95) * (1.0 + grow * 0.14)
-                : (1.08 + grow * 0.28) * clamp(0.65 + asp * 0.32, 0.75, 1.25);
-
-            const ox = isMobile
-                ? (mx * 0.02 + side * 0.08)
-                : (mx * 0.025 + side * 0.34 * Math.min(1.1, asp));
-
-            const oy = isMobile
-                ? (0.12 + 0.025 * Math.sin(sec * 1.4) + (grow > 0.1 ? 0.16 : 0.0))
-                : (0.04 + 0.022 * Math.sin(sec * 1.4) + my * 0.02 - grow * 0.04 + wordSpin * 0.05);
-
-            gl.uniform3f(ctrlP.u.uRot, pitch, yaw, roll);
-            gl.uniform3f(ctrlP.u.uPos, ox, oy, baseScale);
-            gl.drawArrays(gl.TRIANGLE_STRIP, 0, ctrlVertCount);
-
-            ui(s, k);
-        }
-
-        function loop(t) {
-            now += (target - now) * (calm ? 1 : 0.09);
-            mx += (tmx - mx) * 0.06;
-            my += (tmy - my) * 0.06;
-            bonusSpin += (targetBonusSpin - bonusSpin) * 0.08;
-            draw(now, t / 1000);
-            requestAnimationFrame(loop);
-        }
-
-        $("up").onclick = () => scrollTo({ top: 0, behavior: calm ? "auto" : "smooth" });
-
-        // Bottom-left button triggers an instant 360° 3D Acrobatic Flip + optional audio synth
-        let audioCtx, gain;
-        $("sound").onclick = () => {
-            targetBonusSpin += Math.PI * 2;
-            const b = $("sound");
-            const on = b.getAttribute("aria-pressed") !== "true";
-            b.setAttribute("aria-pressed", "true");
-            $("st").textContent = "FLIP 360°!";
-            setTimeout(() => { $("st").textContent = "3D SPIN"; }, 900);
-
-            if (!audioCtx) {
-                try {
-                    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                    gain = audioCtx.createGain();
-                    gain.gain.value = 0.12;
-                    gain.connect(audioCtx.destination);
-                } catch (_) {}
-            }
-            if (audioCtx) {
-                audioCtx.resume();
-                const osc = audioCtx.createOscillator();
-                const g = audioCtx.createGain();
-                osc.type = "sine";
-                osc.frequency.setValueAtTime(220, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(580, audioCtx.currentTime + 0.25);
-                g.gain.setValueAtTime(0.15, audioCtx.currentTime);
-                g.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.3);
-                osc.connect(g).connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.32);
-            }
-        };
-
-        const loadImg = url => new Promise(r => {
-            const img = new Image();
-            img.crossOrigin = "anonymous";
-            img.onload = () => r(img);
-            img.onerror = () => r(null);
-            img.src = url;
-        });
-
-        Promise.all([
-            loadImg(CTRL_IMG_URL),
-            document.fonts ? document.fonts.load(`${EM}px Anton`, "MANETTE") : Promise.resolve()
-        ]).then(([ctrlImg]) => {
-            drawAtlas();
-            gl.activeTexture(gl.TEXTURE1);
-            gl.bindTexture(gl.TEXTURE_2D, tWords);
-            gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, atlas);
-            gl.generateMipmap(gl.TEXTURE_2D);
-            if (aniso) gl.texParameterf(gl.TEXTURE_2D, aniso.TEXTURE_MAX_ANISOTROPY_EXT, 8);
-
-            if (ctrlImg) {
-                prepareTransparentController(ctrlImg);
-                updateLiveControllerTexture(0, 0);
-            }
-            size();
-            read();
-            now = target;
-            requestAnimationFrame(loop);
-        });
-    }
-
-    // ========================================================================
-    // INTERACTIVE 2D/3D CONTROLLER SIMULATOR IN SECTION #simulator
-    // ========================================================================
-    const simCanvas = $("controllerCanvas");
-    if (simCanvas) {
-        const ctx = simCanvas.getContext("2d");
-        const hudStick = $("hudStickText");
-        const hudAction = $("hudActionText");
-        const toggleBtn = $("toggleAutoDemoBtn");
-
-        const bgImg = new Image();
-        bgImg.src = "assets/manette_v2.jpg";
-
-        let autoDemo = true;
-        let draggingStick = null;
-        let activeBtn = null;
-
-        const leftStick = { cx: 402, cy: 354, dx: 0, dy: 0, maxR: 34 };
-        const rightStick = { cx: 622, cy: 354, dx: 0, dy: 0, maxR: 34 };
-
-        const buttons = [
-            { name: "Y", type: "circle", cx: 812.0, cy: 181.5, r: 37.5 },
-            { name: "X", type: "circle", cx: 731.5, cy: 254.5, r: 37.5 },
-            { name: "B", type: "circle", cx: 889.5, cy: 255.0, r: 37.5 },
-            { name: "A", type: "circle", cx: 811.5, cy: 325.5, r: 37.5 },
-            { name: "SELECT", type: "pill", x: 425, y: 231, w: 54, h: 25 },
-            { name: "START", type: "pill", x: 530, y: 231, w: 54, h: 25 },
-            { name: "DPAD_UP", type: "dpad", x: 187, y: 181, w: 51, h: 63 },
-            { name: "DPAD_DOWN", type: "dpad", x: 187, y: 277, w: 51, h: 65 },
-            { name: "DPAD_LEFT", type: "dpad", x: 132, y: 235, w: 63, h: 51 },
-            { name: "DPAD_RIGHT", type: "dpad", x: 229, y: 235, w: 60, h: 51 }
-        ];
-
-        toggleBtn?.addEventListener("click", () => {
-            autoDemo = !autoDemo;
-            toggleBtn.textContent = autoDemo ? "Mode Auto : ACTIF" : "Mode Manuel : ACTIF";
-            if (!autoDemo) {
-                leftStick.dx = 0; leftStick.dy = 0;
-                rightStick.dx = 0; rightStick.dy = 0;
-                activeBtn = null;
-            }
-        });
-
-        function getCanvasCoords(e) {
-            const rect = simCanvas.getBoundingClientRect();
-            const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-            const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-            return {
-                x: (clientX - rect.left) * (simCanvas.width / rect.width),
-                y: (clientY - rect.top) * (simCanvas.height / rect.height)
-            };
-        }
-
-        function handleDown(e) {
-            const p = getCanvasCoords(e);
-            if (Math.hypot(p.x - leftStick.cx, p.y - leftStick.cy) < 75) {
-                autoDemo = false;
-                if (toggleBtn) toggleBtn.textContent = "Mode Manuel : ACTIF";
-                draggingStick = leftStick;
-                handleMove(e);
-                return;
-            }
-            if (Math.hypot(p.x - rightStick.cx, p.y - rightStick.cy) < 75) {
-                autoDemo = false;
-                if (toggleBtn) toggleBtn.textContent = "Mode Manuel : ACTIF";
-                draggingStick = rightStick;
-                handleMove(e);
-                return;
-            }
-            for (const b of buttons) {
-                if (b.type === "circle" && Math.hypot(p.x - b.cx, p.y - b.cy) <= b.r) {
-                    autoDemo = false;
-                    activeBtn = b;
-                    if (hudAction) hudAction.textContent = `APPUI ENFONCÉ + HAPTIQUE : Touche ${b.name}`;
-                    return;
-                } else if (b.type !== "circle" && p.x >= b.x && p.x <= b.x + b.w && p.y >= b.y && p.y <= b.y + b.h) {
-                    autoDemo = false;
-                    activeBtn = b;
-                    if (hudAction) hudAction.textContent = `APPUI ENFONCÉ + HAPTIQUE : ${b.name}`;
-                    return;
-                }
-            }
-        }
-
-        function handleMove(e) {
-            if (!draggingStick) return;
-            e.preventDefault();
-            const p = getCanvasCoords(e);
-            let dx = p.x - draggingStick.cx;
-            let dy = p.y - draggingStick.cy;
-            const dist = Math.hypot(dx, dy);
-            if (dist > draggingStick.maxR) {
-                dx = (dx / dist) * draggingStick.maxR;
-                dy = (dy / dist) * draggingStick.maxR;
-            }
-            draggingStick.dx = dx;
-            draggingStick.dy = dy;
-            if (hudAction) hudAction.textContent = "STICKS 3D EN MOUVEMENT + RETOUR HAPTIQUE";
-        }
-
-        function handleUp() {
-            if (draggingStick) {
-                draggingStick.dx = 0;
-                draggingStick.dy = 0;
-                draggingStick = null;
-            }
-            activeBtn = null;
-        }
-
-        simCanvas.addEventListener("mousedown", handleDown);
-        window.addEventListener("mousemove", handleMove);
-        window.addEventListener("mouseup", handleUp);
-        simCanvas.addEventListener("touchstart", handleDown, { passive: true });
-        simCanvas.addEventListener("touchmove", handleMove, { passive: false });
-        window.addEventListener("touchend", handleUp);
-
-        function drawSimStick(s) {
-            const cavR = 66;
-            const cavGrad = ctx.createRadialGradient(s.cx, s.cy, cavR * 0.1, s.cx, s.cy, cavR);
-            cavGrad.addColorStop(0, "#030914");
-            cavGrad.addColorStop(0.72, "#081832");
-            cavGrad.addColorStop(0.92, "#193A6A");
-            cavGrad.addColorStop(1, "rgba(25,58,106,0)");
-            ctx.beginPath();
-            ctx.arc(s.cx, s.cy, cavR, 0, Math.PI * 2);
-            ctx.fillStyle = cavGrad;
-            ctx.fill();
-
-            const tx = s.cx + s.dx, ty = s.cy + s.dy;
-            const capR = 49;
-            ctx.beginPath();
-            ctx.arc(tx + 4, ty + 8, capR * 1.04, 0, Math.PI * 2);
-            ctx.fillStyle = "rgba(0, 4, 12, 0.65)";
-            ctx.fill();
-
-            const rimGrad = ctx.createRadialGradient(tx - capR * 0.25, ty - capR * 0.25, capR * 0.1, tx, ty, capR);
-            rimGrad.addColorStop(0, "#3867A6");
-            rimGrad.addColorStop(0.55, "#1A3B6E");
-            rimGrad.addColorStop(0.88, "#0B1E40");
-            rimGrad.addColorStop(1, "#061229");
-            ctx.beginPath();
-            ctx.arc(tx, ty, capR, 0, Math.PI * 2);
-            ctx.fillStyle = rimGrad;
-            ctx.fill();
-
-            ctx.beginPath();
-            ctx.arc(tx, ty, capR * 0.88, 0, Math.PI * 2);
-            ctx.strokeStyle = "rgba(135, 195, 255, 0.45)";
-            ctx.lineWidth = 2;
-            ctx.stroke();
-
-            const domeR = capR * 0.68;
-            const domeGrad = ctx.createRadialGradient(tx + domeR * 0.22, ty + domeR * 0.22, domeR * 0.05, tx, ty, domeR);
-            domeGrad.addColorStop(0, "#244D8A");
-            domeGrad.addColorStop(0.65, "#102850");
-            domeGrad.addColorStop(1, "#081733");
-            ctx.beginPath();
-            ctx.arc(tx, ty, domeR, 0, Math.PI * 2);
-            ctx.fillStyle = domeGrad;
-            ctx.fill();
-        }
-
-        function drawSimPressed(b) {
-            if (!b) return;
-            ctx.save();
-            if (b.type === "circle") {
-                const g = ctx.createRadialGradient(b.cx, b.cy, 2, b.cx, b.cy, b.r);
-                g.addColorStop(0, "rgba(2, 10, 26, 0.64)");
-                g.addColorStop(0.75, "rgba(5, 18, 42, 0.48)");
-                g.addColorStop(1, "rgba(4, 14, 34, 0.22)");
-                ctx.beginPath();
-                ctx.arc(b.cx, b.cy, b.r, 0, Math.PI * 2);
-                ctx.fillStyle = g;
-                ctx.fill();
-                ctx.lineWidth = 2.5;
-                ctx.strokeStyle = "rgba(56, 189, 248, 0.65)";
-                ctx.stroke();
-            } else {
-                ctx.beginPath();
-                ctx.roundRect(b.x, b.y, b.w, b.h, 10);
-                ctx.fillStyle = "rgba(3, 12, 30, 0.58)";
-                ctx.fill();
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = "rgba(56, 189, 248, 0.6)";
-                ctx.stroke();
-            }
-            ctx.restore();
-        }
-
-        let t = 0;
-        function renderSim() {
-            t += 0.032;
-            if (autoDemo) {
-                leftStick.dx = Math.cos(t * 1.8) * leftStick.maxR * 0.85;
-                leftStick.dy = Math.sin(t * 1.8) * leftStick.maxR * 0.85;
-                rightStick.dx = Math.cos(-t * 2.2 + 1.0) * rightStick.maxR * 0.85;
-                rightStick.dy = Math.sin(-t * 2.2 + 1.0) * rightStick.maxR * 0.85;
-                const idx = Math.floor(t * 1.2) % buttons.length;
-                activeBtn = buttons[idx];
-            }
-
-            ctx.clearRect(0, 0, simCanvas.width, simCanvas.height);
-            if (bgImg.complete && bgImg.naturalWidth > 0) {
-                ctx.drawImage(bgImg, 0, 0, simCanvas.width, simCanvas.height);
-            }
-            drawSimPressed(activeBtn);
-            drawSimStick(leftStick);
-            drawSimStick(rightStick);
-
-            if (hudStick) {
-                const lx = Math.round((leftStick.dx / leftStick.maxR) * 127);
-                const ly = Math.round((leftStick.dy / leftStick.maxR) * 127);
-                const rx = Math.round((rightStick.dx / rightStick.maxR) * 127);
-                const ry = Math.round((rightStick.dy / rightStick.maxR) * 127);
-                hudStick.textContent = `L.JS: (${lx}, ${ly}) | R.JS: (${rx}, ${ry})`;
-            }
-            requestAnimationFrame(renderSim);
-        }
-        renderSim();
-    }
-})();
-</script>
 </body>
 </html>
