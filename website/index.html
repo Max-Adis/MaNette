@@ -328,14 +328,34 @@
       background: radial-gradient(ellipse at center, rgba(42,79,124,.32), rgba(42,79,124,.08) 42%, transparent 72%);
     }
 
-    .theme-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 36px; }
+    .theme-catalog {
+      margin-top: 36px;
+      display: flex; flex-direction: column; align-items: center;
+      gap: 22px;
+      width: 100%;
+    }
+    .theme-featured {
+      display: flex; justify-content: center; width: 100%;
+    }
+    .theme-principal {
+      width: min(340px, 100%);
+    }
+    .theme-group { width: 100%; }
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+      width: 100%;
+    }
     .theme {
       background: var(--white); border: 1px solid var(--line);
       border-radius: 18px; padding: 16px 12px 14px; text-align: center;
+      margin: 0;
     }
     .theme.dark { background: #10141c; border-color: #1c2430; }
     .theme.dark figcaption { color: #d5e0ec; }
     .theme img { width: 100%; height: 110px; object-fit: contain; margin-bottom: 8px; margin-inline: auto; }
+    .theme-principal img { height: 148px; }
     .theme figcaption { font-size: 13px; font-weight: 700; }
     .theme .sub { display: block; font-weight: 500; color: var(--muted); font-size: 11.5px; margin-top: 2px; }
 
@@ -434,7 +454,6 @@
       .wrap, .nav-inner { width: min(var(--max), calc(100% - 40px)); }
       .hero-grid, .versions-grid, .foot-grid, .benefits-grid, .info-grid { grid-template-columns: 1fr; }
       .info-grid { gap: 16px; }
-      .theme-grid { grid-template-columns: 1fr 1fr; }
       .hero {
         min-height: calc(100svh - 64px);
         display: flex; align-items: center;
@@ -492,9 +511,12 @@
       .hero .cta-row .btn, .cta-copy .btn { min-width: min(100%, 280px); }
       .finish-sticky { padding: 68px 0 16px; }
       .finish-caption { margin-top: 16px; font-size: 11.5px; }
-      .theme-grid { gap: 10px; margin-top: 28px; }
+      .theme-catalog { margin-top: 28px; gap: 18px; }
+      .theme-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .theme-principal { width: min(260px, 86%); }
       .theme { padding: 12px 8px 12px; border-radius: 14px; }
       .theme img { height: 88px; }
+      .theme-principal img { height: 118px; }
       .theme figcaption { font-size: 12.5px; }
       .benefits-grid { gap: 0; }
       .benefit { padding: 20px 0; border-top: 1px solid var(--line); }
@@ -512,6 +534,8 @@
       .section-title { font-size: 28px; }
       section { padding: 52px 0; }
       .theme img { height: 76px; }
+      .theme-principal { width: min(240px, 88%); }
+      .theme-principal img { height: 104px; }
       .theme figcaption { font-size: 12px; }
       .btn { font-size: 14px; padding: 13px 18px; }
       .finish-stage { width: min(300px, 88vw); }
@@ -622,7 +646,7 @@
         <div class="hero-copy">
           <span class="eyebrow"><i>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v18"/><path d="M8 7h8"/><path d="M6 11h12"/><path d="M8 15h8"/></svg>
-          </i>MaNette 3.0 Pro · Android 8+</span>
+          </i>MaNette 3.0 Pro · Android 9+</span>
           <h1>Prenez le <span class="nowrap">contrôle <em>absolu.</em></span></h1>
           <p class="hero-lead">Votre smartphone devient une manette PC. Avec MaNette 3.0 Pro, profitez de neuf nouveaux looks, de sticks analogiques 3D, du retour haptique et d’une connexion Bluetooth HID native, sans logiciel tiers.</p>
           <div class="cta-row">
@@ -635,7 +659,7 @@
           <div class="meta-row">
             <span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
-              Compatible Android 8+
+              Compatible Android 9+
             </span>
             <span>
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M7 7a5 5 0 0 1 10 0v1a5 5 0 0 1-10 0Z"/><path d="M4 11v1a8 8 0 0 0 16 0v-1"/></svg>
@@ -733,43 +757,53 @@
         <p class="section-kicker">Les looks de la 3.0 Pro</p>
         <h2 class="section-title">Tous les looks, <em>disponibles maintenant.</em></h2>
         <p class="section-lead" style="margin-inline:auto;">Les neuf designs officiels de MaNette 3.0 Pro, prêts à être choisis directement dans l’application.</p>
-        <div class="theme-grid">
-          <figure class="theme">
-            <img src="assets/cut/principale.webp" alt="Manette Principale, blanche et bleue">
-            <figcaption>Manette Principale<span class="sub">Édition d’origine · 2.0 &amp; 3.0 Pro</span></figcaption>
-          </figure>
-          <figure class="theme">
-            <img src="assets/cut/std_01.webp" alt="Thème Cyber Gold">
-            <figcaption>Cyber Gold<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme">
-            <img src="assets/cut/std_02.webp" alt="Thème Blanc et Bordeaux">
-            <figcaption>Blanc &amp; Bordeaux<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme">
-            <img src="assets/cut/std_03.webp" alt="Thème Crème et Émeraude">
-            <figcaption>Crème &amp; Émeraude<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme">
-            <img src="assets/cut/std_04.webp" alt="Thème Vert Botanique et Lime">
-            <figcaption>Vert Botanique &amp; Lime<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme dark">
-            <img src="assets/cut/dark_01.webp" alt="Thème Noir et Or">
-            <figcaption>Noir &amp; Or<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme dark">
-            <img src="assets/cut/dark_02.webp" alt="Thème Noir et Carmin">
-            <figcaption>Noir &amp; Carmin<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme dark">
-            <img src="assets/cut/dark_03.webp" alt="Thème Noir et Émeraude">
-            <figcaption>Noir &amp; Émeraude<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
-          <figure class="theme dark">
-            <img src="assets/cut/dark_04.webp" alt="Thème Noir et Vert Botanique">
-            <figcaption>Noir &amp; Vert Botanique<span class="sub">3.0 Pro · Disponible</span></figcaption>
-          </figure>
+        <div class="theme-catalog">
+          <div class="theme-featured">
+            <figure class="theme theme-principal">
+              <img src="assets/cut/principale.webp" alt="Manette Principale, blanche et bleue">
+              <figcaption>Manette Principale<span class="sub">Édition d’origine · 2.0 &amp; 3.0 Pro</span></figcaption>
+            </figure>
+          </div>
+          <div class="theme-group">
+            <div class="theme-grid">
+              <figure class="theme">
+                <img src="assets/cut/std_01.webp" alt="Thème Cyber Gold">
+                <figcaption>Cyber Gold<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme">
+                <img src="assets/cut/std_02.webp" alt="Thème Blanc et Bordeaux">
+                <figcaption>Blanc &amp; Bordeaux<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme">
+                <img src="assets/cut/std_03.webp" alt="Thème Crème et Émeraude">
+                <figcaption>Crème &amp; Émeraude<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme">
+                <img src="assets/cut/std_04.webp" alt="Thème Vert Botanique et Lime">
+                <figcaption>Vert Botanique &amp; Lime<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="theme-group">
+            <div class="theme-grid">
+              <figure class="theme dark">
+                <img src="assets/cut/dark_01.webp" alt="Thème Noir et Or">
+                <figcaption>Noir &amp; Or<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme dark">
+                <img src="assets/cut/dark_02.webp" alt="Thème Noir et Carmin">
+                <figcaption>Noir &amp; Carmin<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme dark">
+                <img src="assets/cut/dark_03.webp" alt="Thème Noir et Émeraude">
+                <figcaption>Noir &amp; Émeraude<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+              <figure class="theme dark">
+                <img src="assets/cut/dark_04.webp" alt="Thème Noir et Vert Botanique">
+                <figcaption>Noir &amp; Vert Botanique<span class="sub">3.0 Pro · Disponible</span></figcaption>
+              </figure>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -783,11 +817,11 @@
           <article class="vcard featured">
             <span class="tag">Nouvelle version · Recommandé</span>
             <h3>MaNette 3.0 Pro</h3>
-            <p>La version à télécharger aujourd’hui. Elle reprend toute l’expérience de la 2.0 Pro, y ajoute neuf looks, et s’ouvre à Android 8 jusqu’à la dernière version.</p>
+            <p>La version à télécharger aujourd’hui. Elle reprend toute l’expérience de la 2.0 Pro, y ajoute neuf looks, et reste compatible d’Android 9 jusqu’à la dernière version.</p>
             <ul>
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Tout ce qu’apporte la 2.0 Pro</li>
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Neuf looks au total, à choisir dans l’application</li>
-              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Compatible Android 8 jusqu’à la dernière version</li>
+              <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Compatible d’Android 9 jusqu’à la dernière version</li>
               <li><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>Bluetooth HID natif, sans logiciel sur le PC</li>
             </ul>
             <a class="btn btn-white" href="MaNette-v3.apk" download="MaNette-v3.apk">
